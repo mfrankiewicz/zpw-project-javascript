@@ -1,0 +1,55 @@
+body.frontend {
+    background-color: #123;
+    height: 1000px;
+    header {
+        nav {
+            display: block;
+            width: 100%;
+            position: fixed;
+            z-index: 16;
+            background-color: #fff;
+            height: 60px;
+            progress {
+                top: -12px;
+                position: relative;
+                width: 100%;
+                height: 5px;
+                @include progress-bar-value-color(#e80000);
+                @include progress-bar-color(#fff);
+            }
+            ul {
+                padding-left: 0;
+                margin-bottom: 0;
+                text-align: center;
+                li {
+                    display: inline-block;
+                    &:not(:first-of-type) {
+                        margin-left: 3em;
+                    }
+                    a {
+                        padding: .5em;
+                        text-decoration: none;
+                        &:link, &:visited, &:hover, &:active {
+                            color: #0275d8;
+                        }
+                    }
+                    &.active {
+                        font-weight: bold;
+                    }
+                }
+                .active-mark {
+                    position: absolute;
+                    height: 5px;
+                    width: 60px;
+                    background-color: #35c6d6;
+                    left: 190px;
+                    transition: .7s;
+                }
+            }
+        }
+        #header-slider {
+            padding-top: 60px;
+        }
+    }
+
+}
