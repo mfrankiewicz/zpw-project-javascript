@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-controller="mainCtrl" ng-app="frontendApp">
+<html lang="pl" ng-controller="mainCtrl" ng-app="frontendApp">
     <head>
         <meta charset="utf-8">
         <title>title</title>
@@ -14,18 +14,54 @@
         <script type="text/javascript" src="/assets/vendor/angular-resource/angular-resource.min.js"></script>
         <script type="text/javascript" src="/assets/vendor/angular-route/angular-route.min.js"></script>
         <script type="text/javascript" src="/assets/vendor/socket.io-client/dist/socket.io.min.js"></script>
-
-        <script type="text/javascript" src="/assets/vendor/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="/assets/vendor/tether/dist/js/tether.min.js"></script>
-        <script type="text/javascript" src="/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-
         <script type="text/javascript" src="/angular/controllers.js"></script>
         <script type="text/javascript" src="/angular/services.js"></script>
         <script type="text/javascript" src="/angular/filters.js"></script>
     </head>
 
-    <body>
-        frontend
+    <body class="frontend">
+        <header>
+            <nav>
+                <progress id="browsing-progress" value="0"></progress>
+                nav
+            </nav>
+            <div ng-controller="sliderCtrl" id="header-slider" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li ng-repeat="slide in slides track by $index"
+                        data-target="#header-slider"
+                        data-slide-to="{{ $index }}" ng-class="{active: $index==0}">
+                    </li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <div ng-repeat="slide in slides track by $index" class="carousel-item" ng-class="{active: $index==0}">
+                        <img class="d-block img-fluid" src="{{ slide }}">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#header-slider" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#header-slider" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </header>
+
+        <main>
+
+
+        </main>
+
+
+        <footer>
+
+
+        </footer>
         <script src="/angular/app.js"></script>
+        <script type="text/javascript" src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="/assets/vendor/tether/dist/js/tether.min.js"></script>
+        <script type="text/javascript" src="/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/assets/js/scripts.js"></script>
     </body>
 </html>
