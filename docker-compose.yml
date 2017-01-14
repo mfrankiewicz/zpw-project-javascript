@@ -1,10 +1,27 @@
 version: '2'
 services:
+    nginx-proxy:
+        container_name: nginx-proxy
+        image: mfrankiewicz/nginx-proxy
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+            - ./docker/certs:/etc/nginx/certs
+        ports:
+            - "80:80"
     nodejs:
         container_name: zpw-nodejs
         build: ./docker
         image: mfrankiewicz/zpw-nodejs
+        expose:
+            - "80"
         volumes:
             - ./app:/usr/src/app
+        environment:
+            - "VIRTUAL_HOST=zpw.loc,www.zpw.loc"
+    mongodb:
+        container_name: mongodb
+        image: library/mongo
         ports:
-            - "80:80"
+            - "27017:27017"
+        volumes:
+            - /data/mongodb:/data/db
