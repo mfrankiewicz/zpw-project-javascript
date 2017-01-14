@@ -13,12 +13,13 @@
     "author": "Michal Frankiewicz <michal@frankiewicz.me>",
     "license": "MIT",
     "dependencies": {
-        "express": "~4.14.0",
-        "bower": "~1.8.0",
-        "nodemon": "~1.11.0",
-        "mongoose": "~4.7.6",
-        "body-parser": "~1.15.2",
-        "cookie-parser": "~1.4.3",
-        "socket.io": "~1.7.2"
+        "express": "4.14.0",
+        "bower": "1.8.0",
+        "nodemon": "1.11.0",
+        "mongoose": "4.7.6",
+        "body-parser": "1.15.2",
+        "cookie-parser": "1.4.3",
+        "socket.io": "1.7.2",
+        "node-sass-middleware": "0.10.1"
     }
 }

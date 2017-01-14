@@ -6,6 +6,7 @@
         "angular-animate": "1.6.1",
         "angular-route": "1.6.1",
         "angular-resource": "1.6.1",
-        "bootstrap": "4.0.0-alpha.6"
+        "bootstrap": "4.0.0-alpha.6",
+        "socket.io-client": "1.7.2"
     }
 }
