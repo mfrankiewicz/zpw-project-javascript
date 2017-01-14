@@ -10,7 +10,7 @@ const socket = require('socket.io' )(server);
 
 
 app.use(sassMiddleware({
-    src: path.join(__dirname, 'sass'),
+    src: path.join(__dirname, 'assets/sass'),
     dest: path.join(__dirname, 'html/assets/css'),
     debug: true,
     outputStyle: 'compressed',
