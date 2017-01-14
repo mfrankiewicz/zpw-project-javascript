@@ -19,11 +19,18 @@
         <script type="text/javascript" src="/angular/filters.js"></script>
     </head>
 
-    <body class="frontend">
+    <body ng-cloak class="frontend">
         <header>
-            <nav>
+            <nav ng-controller="navigationCtrl">
                 <progress id="browsing-progress" value="0"></progress>
-                nav
+                <ul class="container">
+                    <li ng-repeat="page in pages" ng-class="{active: page.active}">
+                        <a href="{{ page.url }}">
+                            {{ page.label }}
+                        </a>
+                    </li>
+                    <div class="active-mark"></div>
+                </ul>
             </nav>
             <div ng-controller="sliderCtrl" id="header-slider" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -48,7 +55,7 @@
             </div>
         </header>
 
-        <main>
+        <main ng-view>
 
 
         </main>
@@ -60,6 +67,7 @@
         </footer>
         <script src="/angular/app.js"></script>
         <script type="text/javascript" src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="/assets/vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
         <script type="text/javascript" src="/assets/vendor/tether/dist/js/tether.min.js"></script>
         <script type="text/javascript" src="/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/assets/js/scripts.js"></script>

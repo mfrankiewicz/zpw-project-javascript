@@ -1,5 +1,5 @@
 body.frontend {
-    background-color: #000;
+    background-color: #123;
     height: 1000px;
     header {
         nav {
@@ -16,6 +16,34 @@ body.frontend {
                 height: 5px;
                 @include progress-bar-value-color(#e80000);
                 @include progress-bar-color(#fff);
+            }
+            ul {
+                padding-left: 0;
+                margin-bottom: 0;
+                text-align: center;
+                li {
+                    display: inline-block;
+                    &:not(:first-of-type) {
+                        margin-left: 3em;
+                    }
+                    a {
+                        padding: .5em;
+                        text-decoration: none;
+                        &:link, &:visited, &:hover, &:active {
+                            color: #0275d8;
+                        }
+                    }
+                    &.active {
+                        font-weight: bold;
+                    }
+                }
+                .active-mark {
+                    position: absolute;
+                    height: 5px;
+                    width: 60px;
+                    background-color: #000;
+                    left: 190px;
+                }
             }
         }
         #header-slider {
