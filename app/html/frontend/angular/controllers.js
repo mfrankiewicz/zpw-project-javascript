@@ -107,7 +107,7 @@ appControllers.controller('menuCtrl', function($scope, dataStorageService, dishS
     }
 });
 
-appControllers.controller('dishCtrl', function($scope, $location, dataStorageService, dishService) {
+appControllers.controller('dishCtrl', function($scope, $location, socket, dataStorageService, dishService) {
     var dishId = '587b9b7fbc202f0740e4cea1';//dataStorageService.getData('detailsDishId');
 
     if (!dishId) {
@@ -126,6 +126,12 @@ appControllers.controller('dishCtrl', function($scope, $location, dataStorageSer
         });
     });
 
+    $scope.getDishComments = function() {
+        dishService.getDishComments(dishId).then(function(data) {
+            $scope.dishComments = data.data;
+        });
+    }
+
     $scope.getDishRating = function() {
         dishService.getDishRatings(dishId).then(function(data) {
             var count = 0;
@@ -140,12 +146,31 @@ appControllers.controller('dishCtrl', function($scope, $location, dataStorageSer
     }
 
     $scope.rateDish = function(dishId, rating) {
-        dishService.rateDish(dishId, rating);
+        dishService.addDishRating({
+            dishId: dishId,
+            rating: rating
+        });
         $scope.rated = true;
         $scope.getDishRating();
     }
 
+    $scope.addDishComment = function(dishId) {
+        dishService.addDishComment({
+            dishId: dishId,
+            author: $scope.dishComment.author,
+            comment: $scope.dishComment.comment,
+            dateAdded: new Date().valueOf()
+        })
+    }
+
+    socket.on('message', function (message) {
+        if (message == "DishCommentAdded") {
+            $scope.getDishComments();
+        }
+    });
+
     $scope.getDishRating();
+    $scope.getDishComments();
 });
 
 appControllers.controller('reservationCtrl', function($scope) {

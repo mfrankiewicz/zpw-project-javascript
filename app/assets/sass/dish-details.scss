@@ -27,4 +27,30 @@ section#dish-details {
             }
         }
     }
+    .comments {
+        .form {
+            width: 75%;
+            margin: 0 auto;
+            margin-bottom: 4em;
+        }
+        .list {
+            width: 75%;
+            margin: 0 auto;
+            &> div.row {
+                -webkit-box-shadow: 8px 7px 5px -4px rgba(0,0,0,0.5);
+                -moz-box-shadow: 8px 7px 5px -4px rgba(0,0,0,0.5);
+                box-shadow: 8px 7px 5px -4px rgba(0,0,0,0.5);
+                &:not(:last-of-type) {
+                    margin-bottom: 1em;
+                }
+                .author {
+                    margin-bottom: 1em;
+                }
+                .comment {
+                    font-style: italic;
+                    padding-bottom: 1em;
+                }
+            }
+        }
+    }
 }

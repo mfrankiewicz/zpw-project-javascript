@@ -5,7 +5,7 @@ mongoose.connect('mongodb://mongodb:27017/zpw');
 
 const models = require('./models')(mongoose);
 
-module.exports = function(app){
+module.exports = function(app, socket){
 
     /**
      * /dishes
@@ -49,6 +49,30 @@ module.exports = function(app){
          });
      });
 
+     /**
+      * dish-comments
+      */
+      app.get('/dish-comments/:dishId', function(req, res){
+          models.DishComment.find({ dishId:req.params.dishId }).sort([['dateAdded', 'descending']]).lean().exec(function (err, data) {
+              return res.end(JSON.stringify(data));
+          });
+      });
+
+      app.post('/dish-comments', function(req, res){
+          models.DishComment({
+                dishId: req.body.dishId,
+                author:req.body.author,
+                comment: req.body.comment,
+                dateAdded: req.body.dateAdded
+          }).save(function(){
+              socket.sockets.send('DishCommentAdded');
+              return res.end();
+          });
+      });
+
+     /**
+      * Dev
+      */
     app.get('/dbmigration/e4dc0c36d021c2d98ed390ad76e66967', function(req, res){
         models.User({
             email: "michal@frankiewicz.me",

@@ -23,7 +23,7 @@ module.exports = function(mongoose){
         dishId: String,
         author: String,
         comment: String,
-        date_added: Number
+        dateAdded: Number
     }));
 
     mongoose.model('tables', new Schema({

@@ -22,4 +22,4 @@ app.use('/assets', express.static(path.join(__dirname, 'html/assets')));
 app.use(bodyParser.json())
 app.use(cookieParser());
 
-require('./routes')(app);
+require('./routes')(app, socket);
