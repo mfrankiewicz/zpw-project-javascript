@@ -27,8 +27,8 @@ module.exports = function(mongoose){
     }));
 
     mongoose.model('tables', new Schema({
-        seats: Number,
-        number: Number
+        number: Number,
+        seats: Number
     }));
 
     mongoose.model('reservations', new Schema({
