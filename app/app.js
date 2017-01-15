@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
@@ -19,5 +18,8 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'html/frontend')));
 app.use('/administrator', express.static(path.join(__dirname, 'html/backend')));
 app.use('/assets', express.static(path.join(__dirname, 'html/assets')));
+
+app.use(bodyParser.json())
+app.use(cookieParser());
 
 require('./routes')(app);

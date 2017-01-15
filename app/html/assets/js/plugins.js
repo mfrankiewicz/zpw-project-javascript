@@ -14,7 +14,6 @@ $.fn.navigation = function(){
         $('ul li', _this.navigationElement).removeClass('active');
         $(this).parent().addClass('active');
         _this.moveActiveMark();
-        event.preventDefault();
     }
 
     this.navigationHoverInCallback = function(){
