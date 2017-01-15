@@ -151,7 +151,6 @@ appControllers.controller('dishCtrl', function($scope, $location, socket, dataSt
             rating: rating
         });
         $scope.rated = true;
-        $scope.getDishRating();
     }
 
     $scope.addDishComment = function(dishId) {
@@ -164,8 +163,13 @@ appControllers.controller('dishCtrl', function($scope, $location, socket, dataSt
     }
 
     socket.on('message', function (message) {
-        if (message == "DishCommentAdded") {
-            $scope.getDishComments();
+        switch (message) {
+            case "DishCommentAdded":
+                $scope.getDishComments();
+                break;
+            case "DishRatingAdded":
+                $scope.getDishRating();
+                break;
         }
     });
 

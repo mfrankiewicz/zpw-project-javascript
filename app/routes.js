@@ -45,6 +45,7 @@ module.exports = function(app, socket){
              dishId: req.body.dishId,
              rating: req.body.rating
          }).save(function(){
+             socket.sockets.send('DishRatingAdded');
              return res.end();
          });
      });
