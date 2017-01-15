@@ -25,55 +25,55 @@ module.exports = function(app, socket){
     /**
      * /dish-categories
      */
-     app.get('/dish-categories', function(req, res){
-         models.DishCategory.find().lean().exec(function (err, data) {
-             return res.end(JSON.stringify(data));
-         });
-     });
+    app.get('/dish-categories', function(req, res){
+        models.DishCategory.find().lean().exec(function (err, data) {
+            return res.end(JSON.stringify(data));
+        });
+    });
 
     /**
-     * dish-ratings
+     * /dish-ratings
      */
-     app.get('/dish-ratings/:dishId', function(req, res){
-         models.DishRating.find({ dishId:req.params.dishId }).lean().exec(function (err, data) {
-             return res.end(JSON.stringify(data));
-         });
-     });
+    app.get('/dish-ratings/:dishId', function(req, res){
+        models.DishRating.find({ dishId:req.params.dishId }).lean().exec(function (err, data) {
+            return res.end(JSON.stringify(data));
+        });
+    });
 
-     app.post('/dish-ratings', function(req, res){
-         models.DishRating({
-             dishId: req.body.dishId,
-             rating: req.body.rating
-         }).save(function(){
-             socket.sockets.send('DishRatingAdded');
-             return res.end();
-         });
-     });
+    app.post('/dish-ratings', function(req, res){
+        models.DishRating({
+            dishId: req.body.dishId,
+            rating: req.body.rating
+        }).save(function(){
+            socket.sockets.send('DishRatingAdded');
+            return res.end();
+        });
+    });
 
-     /**
-      * dish-comments
-      */
-      app.get('/dish-comments/:dishId', function(req, res){
-          models.DishComment.find({ dishId:req.params.dishId }).sort([['dateAdded', 'descending']]).lean().exec(function (err, data) {
-              return res.end(JSON.stringify(data));
-          });
-      });
+    /**
+     * /dish-comments
+     */
+    app.get('/dish-comments/:dishId', function(req, res){
+        models.DishComment.find({ dishId:req.params.dishId }).sort([['dateAdded', 'descending']]).lean().exec(function (err, data) {
+            return res.end(JSON.stringify(data));
+        });
+    });
 
-      app.post('/dish-comments', function(req, res){
-          models.DishComment({
-                dishId: req.body.dishId,
-                author:req.body.author,
-                comment: req.body.comment,
-                dateAdded: req.body.dateAdded
-          }).save(function(){
-              socket.sockets.send('DishCommentAdded');
-              return res.end();
-          });
-      });
+    app.post('/dish-comments', function(req, res){
+        models.DishComment({
+            dishId: req.body.dishId,
+            author:req.body.author,
+            comment: req.body.comment,
+            dateAdded: req.body.dateAdded
+        }).save(function(){
+            socket.sockets.send('DishCommentAdded');
+            return res.end();
+        });
+    });
 
-     /**
-      * Dev
-      */
+    /**
+     * dev
+     */
     app.get('/dbmigration/e4dc0c36d021c2d98ed390ad76e66967', function(req, res){
         models.User({
             email: "michal@frankiewicz.me",
