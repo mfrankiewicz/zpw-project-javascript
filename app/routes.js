@@ -72,6 +72,24 @@ module.exports = function(app, socket){
     });
 
     /**
+     * /tables
+     */
+    app.get('/tables', function(req, res){
+        models.Table.find().lean().exec(function (err, data) {
+            return res.end(JSON.stringify(data));
+        });
+    });
+
+    /**
+     * /reservations
+     */
+    app.get('/reservations', function(req, res){
+        models.Reservation.find().lean().exec(function (err, data) {
+            return res.end(JSON.stringify(data));
+        });
+    });
+
+    /**
      * dev
      */
     app.get('/dbmigration/e4dc0c36d021c2d98ed390ad76e66967', function(req, res){

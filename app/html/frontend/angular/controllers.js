@@ -108,7 +108,7 @@ appControllers.controller('menuCtrl', function($scope, dataStorageService, dishS
 });
 
 appControllers.controller('dishCtrl', function($scope, $location, socket, dataStorageService, dishService) {
-    var dishId = '587b9b7fbc202f0740e4cea1';//dataStorageService.getData('detailsDishId');
+    var dishId = dataStorageService.getData('detailsDishId');//'587b9b7fbc202f0740e4cea1';
 
     if (!dishId) {
         $location.path('/menu');
@@ -141,7 +141,11 @@ appControllers.controller('dishCtrl', function($scope, $location, socket, dataSt
                 sum += dishRating.rating;
             });
 
-            $scope.rating = (sum/count).toFixed(2);
+            if (!count && !sum) {
+                $scope.rating = 'brak ocen';
+            } else {
+                $scope.rating = (sum/count).toFixed(2);
+            }
         });
     }
 
@@ -177,7 +181,33 @@ appControllers.controller('dishCtrl', function($scope, $location, socket, dataSt
     $scope.getDishComments();
 });
 
-appControllers.controller('reservationCtrl', function($scope) {
+appControllers.controller('reservationCtrl', function($scope, dataStorageService, dishService, reservationService) {
+    dishService.getDishes().then(function(data) {
+        $scope.dishes = data.data;
+    });
+
+    dishService.getDishCategories().then(function(data) {
+        $scope.dishCategories = data.data
+    });
+
+    reservationService.getTables().then(function(data) {
+        $scope.tables = data.data;
+    });
+
+    reservationService.getReservations().then(function(data) {
+        $scope.reservations = data.data;
+    });
+
+    // $scope.getAvailableTables = function() {
+    //     angular.forEach($scope.tables, function(table) {
+    //         var available = true;
+    //
+    //         angular.forEach($scope.reservations, function(reservation) {
+    //             if (new Date().valueOf() < reservation.date
+    //                 && reservation.tableId == table._id)
+    //         });
+    //     });
+    // }
 
 });
 

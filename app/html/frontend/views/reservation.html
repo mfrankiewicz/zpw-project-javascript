@@ -1,1 +1,9 @@
-reservation
+<section id="reservation" class="container-fluid">
+    <div class="container">
+        <div class="form-group">
+            <label>Wybierz datę:</label>
+            <input ng-model="reservation.date" type="datetime-local" class="form-control">
+        </div>
+        {{ reservation.date }}
+    </div>
+</section>

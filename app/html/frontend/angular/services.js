@@ -114,3 +114,26 @@ appServices.service('dishService', function($http, $q){
         },
     }
 });
+
+appServices.service('reservationService', function($http, $q){
+    return {
+        getTables: function() {
+            var defer = $q.defer();
+
+            $http.get('/tables').then(function(data) {
+                defer.resolve(data);
+            });
+
+            return defer.promise;
+        },
+        getReservations: function() {
+            var defer = $q.defer();
+
+            $http.get('/reservations').then(function(data) {
+                defer.resolve(data);
+            });
+
+            return defer.promise;
+        }
+    }
+});

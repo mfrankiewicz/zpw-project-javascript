@@ -1,52 +1,54 @@
-<section id="menu">
-    <h1>Menu</h1>
-    <div class="filters">
-        <div class="row">
-            <div class="col-md-12">
-                <select ng-model="dishCategory" ng-options="category as category.label for category in dishCategories track by category._id" class="form-control">
-                </select>
+<section id="menu" class="container-fluid">
+    <div class="container">
+        <h1>Menu</h1>
+        <div class="filters">
+            <div class="row">
+                <div class="col-md-12">
+                    <select ng-model="dishCategory" ng-options="category as category.label for category in dishCategories track by category._id" class="form-control">
+                    </select>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="pagination">
-        <div class="row">
-            <div class="col-md-6">
-                <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="btn btn-primary">
-                    Poprzednia strona
-                </button>
-            </div>
-            <div class="col-md-6">
-                <button ng-disabled="currentPage >= getDishCountByCategoryId(dishCategory._id)/pageSize - 1" ng-click="currentPage=currentPage+1" class="btn btn-primary pull-right">
-                    Następna strona
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="list text-center">
-        <div class="row">
-            <div class="col-md-5">
-                Nazwa
-            </div>
-            <div class="col-md-3">
-                Cena
-            </div>
-            <div class="col-md-4">
-                &nbsp;
-            </div>
-        </div>
-        <div class="row" ng-repeat="dish in dishes | dishCategoryFilter:dishCategory | startFrom:currentPage*pageSize | limitTo:pageSize">
-            <div class="col-md-5">
-                {{ dish.label }}
-            </div>
-            <div class="col-md-3">
-                {{ dish.price | number:2 }} zł
-            </div>
-            <div class="col-md-4">
-                <a href="#!/menu/dish">
-                    <button ng-click="dataStorageService.setData('detailsDishId', dish._id)" class="btn btn-success cursor-pointer">
-                        Szczegóły
+        <div class="pagination">
+            <div class="row">
+                <div class="col-md-6">
+                    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="btn btn-primary">
+                        Poprzednia strona
                     </button>
-                </a>
+                </div>
+                <div class="col-md-6">
+                    <button ng-disabled="currentPage >= getDishCountByCategoryId(dishCategory._id)/pageSize - 1" ng-click="currentPage=currentPage+1" class="btn btn-primary pull-right">
+                        Następna strona
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="list text-center">
+            <div class="row">
+                <div class="col-md-5">
+                    Nazwa
+                </div>
+                <div class="col-md-3">
+                    Cena
+                </div>
+                <div class="col-md-4">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row" ng-repeat="dish in dishes | dishCategoryFilter:dishCategory | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <div class="col-md-5">
+                    {{ dish.label }}
+                </div>
+                <div class="col-md-3">
+                    {{ dish.price | number:2 }} zł
+                </div>
+                <div class="col-md-4">
+                    <a href="#!/menu/dish">
+                        <button ng-click="dataStorageService.setData('detailsDishId', dish._id)" class="btn btn-success cursor-pointer">
+                            Szczegóły
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
