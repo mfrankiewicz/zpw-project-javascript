@@ -16,6 +16,12 @@ module.exports = function(app){
         });
     });
 
+    app.get('/dishes/:dishId', function(req, res){
+        models.Dish.find({ _id:req.params.dishId }).lean().exec(function (err, data) {
+            return res.end(JSON.stringify(data));
+        });
+    });
+
     /**
      * /dish-categories
      */

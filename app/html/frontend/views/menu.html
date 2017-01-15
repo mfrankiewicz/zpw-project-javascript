@@ -41,7 +41,11 @@
                 {{ dish.price | number:2 }} zł
             </div>
             <div class="col-md-4">
-                #button
+                <a href="#!/menu/dish">
+                    <button ng-click="dataStorageService.setData('detailsDishId', dish._id)" class="btn btn-success">
+                        Szczegóły
+                    </button>
+                </a>
             </div>
         </div>
     </div>

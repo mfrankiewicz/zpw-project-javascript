@@ -64,11 +64,12 @@ appControllers.controller('aboutUsCtrl', function($scope) {
 
 });
 
-appControllers.controller('menuCtrl', function($scope, dishService) {
+appControllers.controller('menuCtrl', function($scope, dataStorageService, dishService) {
     $scope.dishes = {},
     $scope.dishCategories = {};
     $scope.currentPage = 0;
     $scope.pageSize = 10;
+    $scope.dataStorageService = dataStorageService;
 
     dishService.getDishes().then(function(data) {
         var dishes = [];
@@ -106,8 +107,24 @@ appControllers.controller('menuCtrl', function($scope, dishService) {
     }
 });
 
-appControllers.controller('dishCtrl', function($scope) {
+appControllers.controller('dishCtrl', function($scope, $location, dataStorageService, dishService) {
+    var dishId = dataStorageService.getData('detailsDishId');
 
+    if (!dishId) {
+        $location.path('/menu');
+    }
+
+    dishService.getDish(dishId).then(function(data) {
+        $scope.dish = data.data[0];
+    });
+
+    dishService.getDishCategories().then(function(data) {
+        angular.forEach(data.data, function(dishCategory) {
+            if ($scope.dish.dishCategoryId == dishCategory._id) {
+                $scope.dishCategory = dishCategory;
+            }
+        });
+    });
 });
 
 appControllers.controller('reservationCtrl', function($scope) {
