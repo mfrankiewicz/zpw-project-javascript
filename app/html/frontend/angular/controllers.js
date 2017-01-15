@@ -71,7 +71,14 @@ appControllers.controller('menuCtrl', function($scope, dishService) {
     $scope.pageSize = 10;
 
     dishService.getDishes().then(function(data) {
-        $scope.dishes = data.data;
+        var dishes = [];
+
+        angular.forEach(data.data, function(dish, key) {
+            if (dish.available) {
+                dishes.push(dish);
+            }
+        });
+        $scope.dishes = dishes;
     });
 
     dishService.getDishCategories().then(function(data) {
