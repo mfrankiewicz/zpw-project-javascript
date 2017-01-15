@@ -1,5 +1,6 @@
 body.frontend {
-    background-color: #123;
+    font-family: Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #faffbd;
     height: 1000px;
     header {
         nav {
@@ -50,6 +51,10 @@ body.frontend {
         #header-slider {
             padding-top: 60px;
         }
+    }
+
+    main {
+        margin-top: 3em;
     }
 
 }

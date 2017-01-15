@@ -24,20 +24,20 @@ appControllers.controller('navigationCtrl', function($scope) {
             active: true
         },
         {
-            url: "#!/shop",
-            label: "Strona druga"
+            url: "#!/about-us",
+            label: "O właścicielach"
         },
         {
-            url: "#!/#3",
-            label: "Strona trzecia"
+            url: "#!/menu",
+            label: "Menu"
         },
         {
-            url: "#!/#4",
-            label: "Strona czwarta"
+            url: "#!/reservation",
+            label: "Rezerwacja"
         },
         {
-            url: "#!/#5",
-            label: "Strona piąta"
+            url: "#!/contact",
+            label: "Kontakt"
         }
     ];
 
@@ -54,4 +54,28 @@ appControllers.controller('navigationCtrl', function($scope) {
     });
     pages.reverse();
     $scope.pages = pages;
+});
+
+appControllers.controller('indexCtrl', function($scope) {
+
+});
+
+appControllers.controller('aboutUsCtrl', function($scope) {
+
+});
+
+appControllers.controller('menuCtrl', function($scope) {
+
+});
+
+appControllers.controller('dishCtrl', function($scope) {
+
+});
+
+appControllers.controller('reservationCtrl', function($scope) {
+
+});
+
+appControllers.controller('contactCtrl', function($scope) {
+
 });
