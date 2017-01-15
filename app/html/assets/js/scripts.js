@@ -7,10 +7,19 @@ $(document).ready(function() {
     $('#browsing-progress').progressBar();
     $('nav').navigation();
 
-    /**
-     * fix bootstrap carousel indicators (angular routing conflict)
-     */
-    $('a[data-slide]').on('click', function(event) {
-        event.preventDefault();
+    $(document).hover(function(){
+        /**
+         * fix bootstrap carousel indicators (angular routing conflict)
+         */
+        $('a[data-slide]').on('click', function(event) {
+            event.preventDefault();
+        });
+        $('i[data-rating-star]').hover(function() {
+            $(this).prevAll().css("opacity", "1");
+            $(this).css("opacity", "1");
+        }, function() {
+            $(this).siblings().css("opacity", ".5");
+            $(this).css("opacity", ".5");
+        });
     });
 });

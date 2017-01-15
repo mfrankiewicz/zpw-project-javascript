@@ -53,6 +53,25 @@ appServices.service('dishService', function($http, $q){
             });
 
             return defer.promise;
+        },
+        rateDish: function(dishId, rating) {
+            var defer = $q.defer();
+
+            return $http.post('/dish-ratings/', {
+                dishId: dishId,
+                rating: rating
+            });
+
+            return defer.promise;
+        },
+        getDishRatings: function(dishId) {
+            var defer = $q.defer();
+
+            $http.get('/dish-ratings/'+dishId).then(function(data) {
+                defer.resolve(data);
+            });
+
+            return defer.promise;
         }
     }
 });

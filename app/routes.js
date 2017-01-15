@@ -31,6 +31,24 @@ module.exports = function(app){
          });
      });
 
+    /**
+     * dish-ratings
+     */
+     app.get('/dish-ratings/:dishId', function(req, res){
+         models.DishRating.find({ dishId:req.params.dishId }).lean().exec(function (err, data) {
+             return res.end(JSON.stringify(data));
+         });
+     });
+
+     app.post('/dish-ratings', function(req, res){
+         models.DishRating({
+             dishId: req.body.dishId,
+             rating: req.body.rating
+         }).save(function(){
+             return res.end();
+         });
+     });
+
     app.get('/dbmigration/e4dc0c36d021c2d98ed390ad76e66967', function(req, res){
         models.User({
             email: "michal@frankiewicz.me",
