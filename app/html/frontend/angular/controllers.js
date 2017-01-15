@@ -64,8 +64,18 @@ appControllers.controller('aboutUsCtrl', function($scope) {
 
 });
 
-appControllers.controller('menuCtrl', function($scope) {
+appControllers.controller('menuCtrl', function($scope, dishService) {
+    $scope.dishes = {},
+    $scope.dishCategories = {};
 
+
+    dishService.getDishes().then(function(data) {
+        $scope.dishes = data;
+    });
+
+    dishService.getDishCategories().then(function(data) {
+        $scope.dishCategories = data;
+    });
 });
 
 appControllers.controller('dishCtrl', function($scope) {

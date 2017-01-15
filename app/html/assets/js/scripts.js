@@ -6,4 +6,11 @@ $(document).ready(function() {
     });
     $('#browsing-progress').progressBar();
     $('nav').navigation();
+
+    /**
+     * fix bootstrap carousel indicators (angular routing conflict)
+     */
+    $('a[data-slide]').on('click', function(event) {
+        event.preventDefault();
+    });
 });

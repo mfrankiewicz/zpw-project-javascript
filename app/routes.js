@@ -6,6 +6,25 @@ mongoose.connect('mongodb://mongodb:27017/zpw');
 const models = require('./models')(mongoose);
 
 module.exports = function(app){
+
+    /**
+     * /dishes
+     */
+    app.get('/dishes', function(req, res){
+        models.Dish.find().lean().exec(function (err, data) {
+            return res.end(JSON.stringify(data));
+        });
+    });
+
+    /**
+     * /dish-categories
+     */
+     app.get('/dish-categories', function(req, res){
+         models.DishCategory.find().lean().exec(function (err, data) {
+             return res.end(JSON.stringify(data));
+         });
+     });
+
     app.get('/dbmigration/e4dc0c36d021c2d98ed390ad76e66967', function(req, res){
         models.User({
             email: "michal@frankiewicz.me",
