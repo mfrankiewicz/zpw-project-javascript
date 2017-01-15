@@ -1,11 +1,45 @@
-<div class="row">
-    <div class="col-md-3">
-        Numer pozycji
+<section id="menu">
+    <div class="filters">
+        <div class="row">
+            <div class="col-md-12">
+                <select ng-model="dishCategory" ng-options="category as category.label for category in dishCategories track by category._id" class="form-control">
+                </select>
+            </div>
+        </div>
     </div>
-    <div class="col-md-5">
-        Nazwa
+    <div class="list text-center">
+        <div class="row">
+            <div class="col-md-5">
+                Nazwa
+            </div>
+            <div class="col-md-3">
+                Cena
+            </div>
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+        </div>
+        <div class="row" ng-repeat="dish in dishes | dishCategoryFilter:dishCategory | startFrom:currentPage*pageSize | limitTo:pageSize">
+            <div class="col-md-5">
+                {{ dish.label }}
+            </div>
+            <div class="col-md-3">
+                {{ dish.price | number:2 }} zł
+            </div>
+            <div class="col-md-4">
+                #button
+            </div>
+        </div>
+        <div class="row mt-30">
+            <div class="col-md-12 text-center">
+                <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="btn btn-default">
+                    Poprzednia strona
+                </button>
+                    {{currentPage+1}}/{{numberOfPages()}}
+                <button ng-disabled="currentPage >= getDishCountByCategoryId(dishCategory._id)/pageSize - 1" ng-click="currentPage=currentPage+1" class="btn btn-default">
+                    Następna strona
+                </button>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        Cena
-    </div>
-</div>
+</section>

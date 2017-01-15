@@ -67,15 +67,36 @@ appControllers.controller('aboutUsCtrl', function($scope) {
 appControllers.controller('menuCtrl', function($scope, dishService) {
     $scope.dishes = {},
     $scope.dishCategories = {};
-
+    $scope.currentPage = 0;
+    $scope.pageSize = 10;
 
     dishService.getDishes().then(function(data) {
-        $scope.dishes = data;
+        $scope.dishes = data.data;
     });
 
     dishService.getDishCategories().then(function(data) {
-        $scope.dishCategories = data;
+        $scope.dishCategory = {_id:0, label: 'wybierz kategorię dania'};
+        $scope.dishCategories = [{_id:0, label: 'wybierz kategorię dania'}].concat(data.data);
     });
+
+    $scope.getDishCountByCategoryId = function(categoryId) {
+        var count = 0;
+        if (!categoryId) {
+            return $scope.dishes.length;
+        }
+
+        angular.forEach($scope.dishes, function(dish, key) {
+            if (dish.dishCategoryId == categoryId) {
+                count++;
+            }
+        });
+
+        return count;
+    };
+
+    $scope.numberOfPages = function(){
+        return Math.ceil($scope.getDishCountByCategoryId($scope.dishCategory._id)/$scope.pageSize);
+    }
 });
 
 appControllers.controller('dishCtrl', function($scope) {

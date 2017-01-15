@@ -1,0 +1,19 @@
+section#menu {
+    .filters {
+        width: 50%;
+        margin: 0 auto;
+        margin-bottom: 2em;
+    }
+    .list {
+        &> div.row {
+            &:first-of-type {
+                font-weight: bold;
+                font-size: 1.1em;
+                margin-bottom: 1em;
+            }
+            &:not(:last-of-type) {
+                margin-bottom: .5em;
+            }
+        }
+    }
+}
