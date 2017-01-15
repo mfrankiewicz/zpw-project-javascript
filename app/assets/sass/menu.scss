@@ -4,6 +4,24 @@ section#menu {
         margin: 0 auto;
         margin-bottom: 2em;
     }
+    .pagination {
+        margin-top: 3em;
+        margin-bottom: 2em;
+        .row {
+            width: 100%;
+            &>div {
+                &:first-of-type {
+                    text-align: left;
+                }
+                &:last-of-type {
+                    text-align: right;
+                }
+                button {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
     .list {
         &> div.row {
             &:first-of-type {
