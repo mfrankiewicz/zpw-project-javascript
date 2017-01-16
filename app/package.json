@@ -4,7 +4,7 @@
     "description": "Projekt na potrzeby przedmiotu Zaawansowane Programowanie Webowe.",
     "main": "index.js",
     "scripts": {
-        "start": "./node_modules/bower/bin/bower install --allow-root && nodemon ./app.js localhost 80"
+        "start": "./node_modules/bower/bin/bower install --allow-root && nodemon ./app.js localhost 80 --watch ./ --ignore ./assets --ignore ./html"
     },
     "repository": {
         "type": "git",
@@ -20,7 +20,12 @@
         "body-parser": "1.15.2",
         "cookie-parser": "1.4.3",
         "socket.io": "1.7.2",
-        "node-sass-middleware": "0.10.1",
-        "md5": "2.2.1"
+        "md5": "2.2.1",
+        "gulp": "3.9.1",
+        "gulp-sass": "3.1.0",
+        "gulp-rename": "1.2.2",
+        "gulp-concat": "2.6.1",
+        "gulp-uglify": "2.0.0",
+        "gulp-util": "3.0.8"
     }
 }

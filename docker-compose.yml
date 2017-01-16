@@ -25,3 +25,11 @@ services:
             - "27017:27017"
         volumes:
             - /data/mongodb:/data/db
+    logrotate:
+        image: michaloo/logrotate
+        container_name: logrotate
+        environment:
+            - "GOCRON_SCHEDULER=0 0 * * * *"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /var/lib/docker:/var/lib/docker
