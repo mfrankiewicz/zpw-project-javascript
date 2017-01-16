@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/assets/vendor/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="/assets/vendor/tether/dist/css/tether.min.css">
         <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
-        
+
         <link rel="stylesheet" href="/assets/css/styles.min.css">
     </head>
 
@@ -34,7 +34,7 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div ng-repeat="slide in slides track by $index" class="carousel-item" ng-class="{active: $index==0}">
-                        <img class="d-block img-fluid" src="{{ slide }}">
+                        <img class="d-block img-fluid" ng-src="{{ slide }}">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#header-slider" role="button" data-slide="prev">

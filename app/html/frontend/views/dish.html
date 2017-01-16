@@ -24,7 +24,7 @@
             <div id="dish-photos" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner" role="listbox">
                     <div ng-repeat="photo in dish.photos track by $index" class="carousel-item" ng-class="{active: $index==0}">
-                        <img class="d-block img-fluid" src="{{ photo }}">
+                        <img class="d-block img-fluid" ng-src="{{ photo }}">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#dish-photos" role="button" data-slide="prev">
@@ -39,7 +39,7 @@
                     <li ng-repeat="photo in dish.photos track by $index"
                         data-target="#dish-photos"
                         data-slide-to="{{ $index }}" ng-class="{active: $index==0}">
-                        <img class="d-block img-fluid" src="{{ photo }}">
+                        <img class="d-block img-fluid" ng-src="{{ photo }}">
                     </li>
                 </ol>
             </div>
