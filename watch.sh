@@ -1,0 +1,1 @@
+docker-compose run -d nodejs node_modules/gulp/bin/gulp.js watch

@@ -1,5 +1,5 @@
 /app/node_modules/
-/app/assets/vendor/
 /app/npm-debug.log
+/app/html/assets/vendor/
 /app/html/assets/css/*.css
 /app/html/assets/js/*.js

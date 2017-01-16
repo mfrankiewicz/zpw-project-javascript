@@ -23,5 +23,5 @@ $(document).ready(function() {
         });
     });
 
-    $('body').css("display", "block");
+    $('body').css("visibility", "visible");
 });
