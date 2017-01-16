@@ -4,7 +4,7 @@
     "description": "Projekt na potrzeby przedmiotu Zaawansowane Programowanie Webowe.",
     "main": "index.js",
     "scripts": {
-        "start": "./node_modules/bower/bin/bower install --allow-root && nodemon ./app.js localhost 80"
+        "start": "./node_modules/bower/bin/bower install --allow-root && nodemon ./app.js localhost 80 --watch ./ --ignore ./assets --ignore ./html"
     },
     "repository": {
         "type": "git",
