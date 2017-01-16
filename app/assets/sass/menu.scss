@@ -1,0 +1,41 @@
+section#menu {
+    h1 {
+        text-align: center;
+        margin-bottom: 2em;
+    }
+    .filters {
+        width: 50%;
+        margin: 0 auto;
+        margin-bottom: 2em;
+    }
+    .pagination {
+        margin-top: 3em;
+        margin-bottom: 2em;
+        .row {
+            width: 100%;
+            &>div {
+                &:first-of-type {
+                    text-align: left;
+                }
+                &:last-of-type {
+                    text-align: right;
+                }
+                button {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .list {
+        &> div.row {
+            &:first-of-type {
+                font-weight: bold;
+                font-size: 1.1em;
+                margin-bottom: 1em;
+            }
+            &:not(:last-of-type) {
+                margin-bottom: .5em;
+            }
+        }
+    }
+}

@@ -1,5 +1,6 @@
 body.frontend {
-    background-color: #123;
+    font-family: Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #fff;
     height: 1000px;
     header {
         nav {
@@ -7,7 +8,7 @@ body.frontend {
             width: 100%;
             position: fixed;
             z-index: 16;
-            background-color: #fff;
+            background-color: #484848;
             height: 60px;
             progress {
                 top: -12px;
@@ -30,7 +31,7 @@ body.frontend {
                         padding: .5em;
                         text-decoration: none;
                         &:link, &:visited, &:hover, &:active {
-                            color: #0275d8;
+                            color: #fff;
                         }
                     }
                     &.active {
@@ -52,4 +53,8 @@ body.frontend {
         }
     }
 
+    main {
+        margin-top: 3em;
+        margin-bottom: 3em;
+    }
 }

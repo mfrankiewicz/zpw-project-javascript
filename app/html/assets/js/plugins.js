@@ -24,13 +24,17 @@ $.fn.navigation = function(){
         _this.moveActiveMark();
     }
 
+    this.windowResizeCallback = function(){
+        _this.moveActiveMark();
+    }
+
     this.init = function(){
         if ($(this.get(0)).length) {
             this.navigationElement = $(this.get(0));
             this.moveActiveMark();
             $('ul li a', this.navigationElement).on('click', this.navigationClickCallback);
             $('li', this.navigationElement).hover(this.navigationHoverInCallback, this.navigationHoverOutCallback);
-
+            $(window).resize(this.windowResizeCallback);
         }
     }
 
