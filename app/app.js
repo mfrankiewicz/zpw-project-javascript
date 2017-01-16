@@ -14,5 +14,4 @@ const models = require('./models')(mongoose);
 app.use(bodyParser.json())
 app.use(cookieParser());
 
-require('./gulp-tasks')();
 require('./routes')(app, express, socket, path, models);
