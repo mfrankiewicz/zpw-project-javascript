@@ -5,8 +5,9 @@ const concat = require('gulp-concat');
 const concatCss = require('gulp-concat-css');
 const uglify = require('gulp-uglify');
 const gulpUtil = require('gulp-util');
-const bower = require('bower');
+const bower = require('gulp-bower');
 const nodemon = require('nodemon');
+const runSequence = require('run-sequence');
 
 gulp.task('sass', function () {
     return gulp.src('./assets/sass/styles.scss')
@@ -74,19 +75,26 @@ gulp.task('vendor-css', function() {
     .pipe(gulp.dest('./html/assets/css/'));
 });
 
+gulp.task('server', function() {
+    nodemon({
+        script: 'app.js',
+        watch: ['./'],
+        ignore: ['./assets', './html']
+    });
+});
+
+gulp.task('bower', function() {
+    return bower()
+        .pipe(gulp.dest('./assets/vendor/'));
+});
+
+gulp.task('deploy', function () {
+    runSequence('bower', 'sass', 'js', 'angular-backend', 'angular-frontend', 'vendor-js', 'vendor-css', 'server');
+});
+
 gulp.task('watch', function() {
     gulp.watch('./assets/sass/**/*.scss', ['sass']);
     gulp.watch('./assets/js/*.js', ['js']);
     gulp.watch('./assets/angular/backend/*.js', ['angular-backend']);
     gulp.watch('./assets/angular/frontend/*.js', ['angular-frontend']);
 });
-
-gulp.task('deploy', function() {
-    bower.commands.install([], {save: true}, {});
-    gulp.start('sass', 'js', 'angular-backend', 'angular-frontend', 'vendor-js', 'vendor-css');
-    nodemon({
-        script: 'app.js',
-        watch: ['./'],
-        ignore: ['./assets', './html']
-    });
-})
