@@ -55,7 +55,7 @@ appServices.factory('socket', ['$rootScope', function ($rootScope) {
     };
 }]);
 
-appServices.service('dishService', function($http, $q){
+appServices.service('dishService', ['$http', '$q', function($http, $q){
     return {
         getDishes: function() {
             var defer = $q.defer();
@@ -113,9 +113,9 @@ appServices.service('dishService', function($http, $q){
             return $http.post('/dish-comments/', dishComment);
         },
     }
-});
+}]);
 
-appServices.service('reservationService', function($http, $q){
+appServices.service('reservationService', ['$http', '$q', function($http, $q){
     return {
         getTables: function() {
             var defer = $q.defer();
@@ -136,4 +136,4 @@ appServices.service('reservationService', function($http, $q){
             return defer.promise;
         }
     }
-});
+}]);

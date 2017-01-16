@@ -1,10 +1,10 @@
 var appControllers = angular.module('appControllers',[]);
 
-appControllers.controller('mainCtrl', function($scope) {
+appControllers.controller('mainCtrl', ['$scope', function($scope) {
     console.log('injected');
-});
+}]);
 
-appControllers.controller('sliderCtrl', function($scope) {
+appControllers.controller('sliderCtrl', ['$scope', function($scope) {
     $scope.slides = [
         'http://placehold.it/1920x300/015b8d/ffffff',
         'http://placehold.it/1920x300/e82a30/ffffff',
@@ -14,9 +14,9 @@ appControllers.controller('sliderCtrl', function($scope) {
         'http://placehold.it/1920x300/bfa129/ffffff',
         'http://placehold.it/1920x300/9c29bf/ffffff'
     ];
-});
+}]);
 
-appControllers.controller('navigationCtrl', function($scope) {
+appControllers.controller('navigationCtrl', ['$scope', function($scope) {
     pages = [
         {
             url: "#!/",
@@ -54,17 +54,17 @@ appControllers.controller('navigationCtrl', function($scope) {
     });
     pages.reverse();
     $scope.pages = pages;
-});
+}]);
 
-appControllers.controller('indexCtrl', function($scope) {
+appControllers.controller('indexCtrl', ['$scope', function($scope) {
 
-});
+}]);
 
-appControllers.controller('aboutUsCtrl', function($scope) {
+appControllers.controller('aboutUsCtrl', ['$scope', function($scope) {
 
-});
+}]);
 
-appControllers.controller('menuCtrl', function($scope, dataStorageService, dishService) {
+appControllers.controller('menuCtrl', ['$scope', 'dataStorageService', 'dishService', function($scope, dataStorageService, dishService) {
     $scope.dishes = {},
     $scope.dishCategories = {};
     $scope.currentPage = 0;
@@ -105,9 +105,9 @@ appControllers.controller('menuCtrl', function($scope, dataStorageService, dishS
     $scope.numberOfPages = function(){
         return Math.ceil($scope.getDishCountByCategoryId($scope.dishCategory._id)/$scope.pageSize);
     }
-});
+}]);
 
-appControllers.controller('dishCtrl', function($scope, $location, socket, dataStorageService, dishService) {
+appControllers.controller('dishCtrl', ['$scope', '$location', 'socket', 'dataStorageService', 'dishService', function($scope, $location, socket, dataStorageService, dishService) {
     var dishId = dataStorageService.getData('detailsDishId');//'587b9b7fbc202f0740e4cea1';
 
     if (!dishId) {
@@ -179,9 +179,9 @@ appControllers.controller('dishCtrl', function($scope, $location, socket, dataSt
 
     $scope.getDishRating();
     $scope.getDishComments();
-});
+}]);
 
-appControllers.controller('reservationCtrl', function($scope, dataStorageService, dishService, reservationService) {
+appControllers.controller('reservationCtrl', ['$scope', 'dataStorageService', 'dishService', 'reservationService', function($scope, dataStorageService, dishService, reservationService) {
     dishService.getDishes().then(function(data) {
         $scope.dishes = data.data;
     });
@@ -209,8 +209,8 @@ appControllers.controller('reservationCtrl', function($scope, dataStorageService
     //     });
     // }
 
-});
+}]);
 
-appControllers.controller('contactCtrl', function($scope) {
+appControllers.controller('contactCtrl', ['$scope', function($scope) {
 
-});
+}]);
