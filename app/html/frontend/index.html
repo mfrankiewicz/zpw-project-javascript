@@ -5,16 +5,8 @@
         <title>title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="/assets/vendor/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/assets/vendor/tether/dist/css/tether.min.css">
-        <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/assets/css/libs.min.css">
         <link rel="stylesheet" href="/assets/css/styles.min.css">
-
-        <script type="text/javascript" src="/assets/vendor/angular/angular.min.js"></script>
-        <script type="text/javascript" src="/assets/vendor/angular-animate/angular-animate.min.js"></script>
-        <script type="text/javascript" src="/assets/vendor/angular-resource/angular-resource.min.js"></script>
-        <script type="text/javascript" src="/assets/vendor/angular-route/angular-route.min.js"></script>
-        <script type="text/javascript" src="/assets/vendor/socket.io-client/dist/socket.io.min.js"></script>
     </head>
 
     <body ng-cloak class="frontend">
@@ -39,7 +31,7 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div ng-repeat="slide in slides track by $index" class="carousel-item" ng-class="{active: $index==0}">
-                        <img class="d-block img-fluid" src="{{ slide }}">
+                        <img class="d-block img-fluid" ng-src="{{ slide }}">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#header-slider" role="button" data-slide="prev">
@@ -63,11 +55,8 @@
 
 
         </footer>
-        <script type="text/javascript" src="/assets/js/app-frontend.min.js"></script>
-        <script type="text/javascript" src="/assets/vendor/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="/assets/vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
-        <script type="text/javascript" src="/assets/vendor/tether/dist/js/tether.min.js"></script>
-        <script type="text/javascript" src="/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/assets/js/libs.min.js"></script>
         <script type="text/javascript" src="/assets/js/scripts.min.js"></script>
+        <script type="text/javascript" src="/assets/js/app-frontend.min.js"></script>
     </body>
 </html>

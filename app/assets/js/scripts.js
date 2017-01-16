@@ -22,4 +22,6 @@ $(document).ready(function() {
             $(this).css("opacity", ".5");
         });
     });
+
+    $('body').css("display", "block");
 });
