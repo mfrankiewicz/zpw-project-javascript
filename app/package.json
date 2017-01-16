@@ -26,6 +26,7 @@
         "gulp-rename": "1.2.2",
         "gulp-concat": "2.6.1",
         "gulp-uglify": "2.0.0",
-        "gulp-util": "3.0.8"
+        "gulp-util": "3.0.8",
+        "gulp-concat-css": "2.3.0"
     }
 }
