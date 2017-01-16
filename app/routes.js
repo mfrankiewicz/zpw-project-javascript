@@ -1,11 +1,12 @@
 const md5 = require('md5');
-const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://mongodb:27017/zpw');
-
-const models = require('./models')(mongoose);
-
-module.exports = function(app, socket){
+module.exports = function(app, express, socket, path, models, md5){
+    /**
+     * static paths
+     */
+    app.use('/', express.static(path.join(__dirname, 'html/frontend')));
+    app.use('/administrator', express.static(path.join(__dirname, 'html/backend')));
+    app.use('/assets', express.static(path.join(__dirname, 'html/assets')));
 
     /**
      * /dishes
