@@ -1,9 +1,15 @@
 <section id="reservation" class="container-fluid">
     <div class="container">
-        <div class="form-group">
-            <label>Wybierz datę:</label>
-            <input ng-model="reservation.date" type="datetime-local" class="form-control">
+        <div class="form">
+            <div class="date form-group">
+                <label>Wybierz datę:</label>
+                <input ng-model="reservation.date" ng-change="setReservationDate()" type="datetime-local" class="form-control">
+            </div>
+            <div ng-if="dataStorageService.getData('reservation').date || 1" class="table">
+                <div class="table-map">
+                    <div ng-click="setReservationTable($event, table._id)" ng-repeat="table in tables" class="table" data-toggle="tooltip" data-placement="top" title="Stolik nr {{ table.number }}, ilość miejsc - {{ table.seats }}"></div>
+                </div>
+            </div>
         </div>
-        {{ reservation.date }}
     </div>
 </section>

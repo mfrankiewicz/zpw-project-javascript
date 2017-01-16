@@ -1,7 +1,12 @@
 var appControllers = angular.module('appControllers',[]);
 
 appControllers.controller('mainCtrl', ['$scope', function($scope) {
-    console.log('injected');
+    /**
+     * fix bootstrap carousel indicators (angular routing conflict)
+     */
+    $('a[data-slide]').on('click', function(event) {
+        event.preventDefault();
+    });
 }]);
 
 appControllers.controller('sliderCtrl', ['$scope', function($scope) {
@@ -182,6 +187,8 @@ appControllers.controller('dishCtrl', ['$scope', '$location', 'socket', 'dataSto
 }]);
 
 appControllers.controller('reservationCtrl', ['$scope', 'dataStorageService', 'dishService', 'reservationService', function($scope, dataStorageService, dishService, reservationService) {
+    $scope.dataStorageService = dataStorageService;
+
     dishService.getDishes().then(function(data) {
         $scope.dishes = data.data;
     });
@@ -209,6 +216,28 @@ appControllers.controller('reservationCtrl', ['$scope', 'dataStorageService', 'd
     //     });
     // }
 
+    $scope.setReservationDate = function() {
+        if ($scope.reservation.date) {
+            dataStorageService.setData('reservation', $scope.reservation);
+        } else {
+            dataStorageService.setData('reservation', null);
+        }
+
+        /**
+         * TODO parsowanie daty
+         */
+        console.log(new Date($scope.reservation.date).valueOf());
+    }
+
+    $scope.setReservationTable = function(event, tableId) {
+        if (!$(event.target).hasClass('unavailable')) {
+            $('section#reservation .table-map .table').removeClass('active');
+            $(event.target).addClass('active');
+
+            $scope.reservation.table = tableId;
+            dataStorageService.setData('reservation', $scope.reservation);
+        }
+    }
 }]);
 
 appControllers.controller('contactCtrl', ['$scope', function($scope) {
