@@ -2,12 +2,10 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const rename = require('gulp-rename');
 const concat = require('gulp-concat');
-const concatCss = require('gulp-concat-css');
 const uglify = require('gulp-uglify');
 const gulpUtil = require('gulp-util');
 const bower = require('gulp-bower');
 const nodemon = require('nodemon');
-const runSequence = require('run-sequence');
 
 gulp.task('sass', function () {
     return gulp.src('./assets/sass/styles.scss')
@@ -47,34 +45,6 @@ gulp.task('angular-frontend', function() {
     .pipe(gulp.dest('./html/assets/js/'));
 });
 
-gulp.task('vendor-js', function() {
-    return gulp.src([
-        './assets/vendor/angular/angular.min.js',
-        './assets/vendor/angular-animate/angular-animate.min.js',
-        './assets/vendor/angular-resource/angular-resource.min.js',
-        './assets/vendor/angular-route/angular-route.min.js',
-        './assets/vendor/socket.io-client/dist/socket.io.min.js',
-        './assets/vendor/jquery/dist/jquery.min.js',
-        './assets/vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js',
-        './assets/vendor/tether/dist/js/tether.min.js',
-        './assets/vendor/bootstrap/dist/js/bootstrap.min.js'
-    ])
-    .pipe(concat('libs.min.js'))
-    .pipe(gulp.dest('./html/assets/js/'));
-});
-
-gulp.task('vendor-css', function() {
-    return gulp.src([
-        './assets/vendor/bootstrap/dist/css/bootstrap.min.css',
-        './assets/vendor/tether/dist/css/tether.min.css',
-        './assets/vendor/font-awesome/css/font-awesome.min.css'
-    ])
-    .pipe(concatCss('libs.min.css', {
-        inlineImports: false,
-    }))
-    .pipe(gulp.dest('./html/assets/css/'));
-});
-
 gulp.task('server', function() {
     nodemon({
         script: 'app.js',
@@ -85,11 +55,11 @@ gulp.task('server', function() {
 
 gulp.task('bower', function() {
     return bower()
-        .pipe(gulp.dest('./assets/vendor/'));
+        .pipe(gulp.dest('./html/assets/vendor/'));
 });
 
 gulp.task('deploy', function () {
-    runSequence('bower', 'sass', 'js', 'angular-backend', 'angular-frontend', 'vendor-js', 'vendor-css', 'server');
+    gulp.start('bower', 'sass', 'js', 'angular-backend', 'angular-frontend', 'server');
 });
 
 gulp.task('watch', function() {
