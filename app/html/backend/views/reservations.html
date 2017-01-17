@@ -1,0 +1,58 @@
+<section id="menu" class="container-fluid">
+    <div class="container">
+        <h1>Rezerwacje</h1>
+        <div class="filters">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="date form-group">
+                        <label>Wybierz datę:</label>
+                        <input ng-model="filters.date.date" type="datetime-local" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="date form-group">
+                        <label>Wybierz zakres dat:</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input ng-model="filters.date.dateFrom" type="datetime-local" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <input ng-model="filters.date.dateTo" type="datetime-local" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="list text-center">
+            <div class="row">
+                <div class="col-md-5">
+                    Imię i nazwisko
+                </div>
+                <div class="col-md-5">
+                    Data
+                </div>
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row" ng-repeat="reservation in reservations | dateFilter:filters.date">
+                <div class="col-md-5">
+                    {{ reservation.firstname }} {{ reservation.lastname }}
+                </div>
+                <div class="col-md-5">
+                    {{ reservation.date*1000 | date:'yyyy-MM-dd HH:mm' }}
+                </div>
+                <div class="col-md-2 text-center">
+                    <a href="#!/reservations/details/{{ reservation._id }}">
+                        <button class="btn btn-success cursor-pointer">
+                            Szczegóły
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

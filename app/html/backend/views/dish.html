@@ -1,0 +1,39 @@
+<section id="dish-form" class="container-fluid">
+    <div class="container">
+        <form ng-submit="saveDish()">
+            <div class="form-group">
+                <input ng-model="dish.label" required type="text" class="form-control" placeholder="nazwa">
+            </div>
+            <div class="form-group">
+                <select ng-model="dish.dishCategory" ng-options="category as category.label for category in dishCategories track by category._id" class="form-control">
+                </select>
+            </div>
+            <div class="form-group">
+                <input ng-model="dish.price" type="text" class="form-control" placeholder="cena">
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" ng-model="dish.description" rows="5" placeholder="opis"></textarea>
+            </div>
+            <div class="form-group">
+                <div class="checkbox disabled">
+                  <label><input type="checkbox" ng-model="dish.available">danie dostępne</label>
+                </div>
+            </div>
+            <div>
+                Zdjęcia
+            </div>
+            <div ng-repeat="photo in dish.photos track by $index" class="form-group photo">
+                <input class="form-control" type="text" ng-model="dish.photos[$index]" />
+            </div>
+            <div>
+                <button ng-click="addDishPhoto()" type="button" class="btn btn-success">Dodaj zdjęcie</button>
+            </div>
+            <div class="mt-50" ng-if="dishId">
+                <button type="submit" class="btn btn-danger">Zapisz</button>
+            </div>
+            <div class="mt-50" ng-if="!dishId">
+                <button type="submit" class="btn btn-danger">Dodaj</button>
+            </div>
+        </form>
+    </div>
+</section>

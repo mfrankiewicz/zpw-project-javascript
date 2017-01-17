@@ -69,7 +69,7 @@ appControllers.controller('aboutUsCtrl', ['$scope', function($scope) {
 
 }]);
 
-appControllers.controller('menuCtrl', ['$scope', 'dataStorageService', 'dishService', function($scope, dataStorageService, dishService) {
+appControllers.controller('menuCtrl', ['$scope', 'socket', 'dataStorageService', 'dishService', function($scope, socket, dataStorageService, dishService) {
     $scope.dishes = {},
     $scope.dishCategories = {};
     $scope.currentPage = 0;
@@ -136,6 +136,24 @@ appControllers.controller('menuCtrl', ['$scope', 'dataStorageService', 'dishServ
 
         dataStorageService.setData('reservation', reservation);
     }
+
+    socket.on('message', function (message) {
+        switch (message) {
+            case "DishAdded":
+            case "DishUpdated":
+                dishService.getDishes().then(function(data) {
+                    var dishes = [];
+
+                    angular.forEach(data.data, function(dish, key) {
+                        if (dish.available) {
+                            dishes.push(dish);
+                        }
+                    });
+                    $scope.dishes = dishes;
+                });
+                break;
+        }
+    });
 
 }]);
 

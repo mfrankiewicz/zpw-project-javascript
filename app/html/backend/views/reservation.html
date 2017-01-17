@@ -1,0 +1,66 @@
+<section id="reservation-details" class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Data</strong>
+            </div>
+            <div class="col-md-6">
+                {{ reservation.date * 1000 | date:'yyyy-MM-dd HH:mm' }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Numer stolika</strong>
+            </div>
+            <div class="col-md-6">
+                {{ getTableByTableId(reservation.tableId).number }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Dane rezerwującego</strong>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Imię i nazwisko</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{ reservation.firstname }} {{ reservation.lastname }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Adres e-mail</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{ reservation.email }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Numer telefonu</strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{ reservation.phone }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Zamówione Dania</strong>
+            </div>
+            <div class="col-md-6">
+                <div class="row" ng-repeat="dish in reservation.dishes">
+                    <div class="col-md-6">
+                        {{ getDishLabelByDishId(dish.dishId) }}
+                    </div>
+                    <div class="col-md-6">
+                        x{{ dish.quantity }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -27,6 +27,9 @@ gulp.task('js', function() {
 
 gulp.task('angular-backend', function() {
     return gulp.src([
+        './assets/angular/backend/controllers.js',
+        './assets/angular/backend/filters.js',
+        './assets/angular/backend/services.js',
         './assets/angular/backend/app.js'
     ])
     .pipe(concat('app-backend.min.js'))

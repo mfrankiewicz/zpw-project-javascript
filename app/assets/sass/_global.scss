@@ -1,9 +1,65 @@
 body {
+    font-family: Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #fff;
+    height: 1000px;
     visibility: hidden;
-}
-progress
-{
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
+    progress
+    {
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+    }
+    header {
+        nav {
+            display: block;
+            width: 100%;
+            position: fixed;
+            z-index: 16;
+            background-color: #484848;
+            height: 60px;
+            progress {
+                top: -12px;
+                position: relative;
+                width: 100%;
+                height: 5px;
+                @include progress-bar-value-color(#e80000);
+                @include progress-bar-color(#fff);
+            }
+            ul {
+                padding-left: 0;
+                margin-bottom: 0;
+                text-align: center;
+                li {
+                    display: inline-block;
+                    &:not(:first-of-type) {
+                        margin-left: 3em;
+                    }
+                    a {
+                        padding: .5em;
+                        &:link, &:visited, &:hover, &:active {
+                            color: #fff;
+                            text-decoration: none !important;
+                        }
+                    }
+                    &.active {
+                        font-weight: bold;
+                    }
+                }
+                .active-mark {
+                    position: absolute;
+                    height: 5px;
+                    width: 60px;
+                    background-color: #35c6d6;
+                    left: 190px;
+                    transition: .7s;
+                }
+            }
+        }
+        #header-slider {
+            padding-top: 60px;
+        }
+    }
+    main {
+        margin-bottom: 3em;
+    }
 }

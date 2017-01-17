@@ -1,6 +1,6 @@
 const md5 = require('md5');
 
-module.exports = function(app, express, socket, path, models, md5){
+module.exports = function(app, express, socket, path, models){
     /**
      * static paths
      */
@@ -20,6 +20,38 @@ module.exports = function(app, express, socket, path, models, md5){
     app.get('/dishes/:dishId', function(req, res){
         models.Dish.find({ _id:req.params.dishId }).lean().exec(function (err, data) {
             return res.end(JSON.stringify(data));
+        });
+    });
+
+    app.put('/dishes/:dishId', function (req, res) {
+
+        var dishId = req.params.dishId;
+
+        models.Dish.findOneAndUpdate({ _id: dishId }, {
+            dishCategoryId: req.body.dishCategoryId,
+            label: req.body.label,
+            price: req.body.price,
+            description: req.body.description,
+            photos: req.body.photos,
+            available: req.body.available
+        }, {upsert:true}, function(err, doc){
+            socket.sockets.send('DishUpdated');
+            return res.end();
+        });
+
+    });
+
+    app.post('/dishes/', function (req, res) {
+        models.Dish({
+            dishCategoryId: req.body.dishCategoryId,
+            label: req.body.label,
+            price: req.body.price,
+            description: req.body.description,
+            photos: req.body.photos,
+            available: req.body.available
+        }).save(function(){
+            socket.sockets.send('DishAdded');
+            return res.end();
         });
     });
 
@@ -85,7 +117,13 @@ module.exports = function(app, express, socket, path, models, md5){
      * /reservations
      */
     app.get('/reservations', function(req, res){
-        models.Reservation.find().lean().exec(function (err, data) {
+        models.Reservation.find().sort([['date', 'descending']]).lean().exec(function (err, data) {
+            return res.end(JSON.stringify(data));
+        });
+    });
+
+    app.get('/reservations/:reservationId', function(req, res){
+        models.Reservation.find({ _id:req.params.reservationId }).lean().exec(function (err, data) {
             return res.end(JSON.stringify(data));
         });
     });
@@ -109,12 +147,45 @@ module.exports = function(app, express, socket, path, models, md5){
     });
 
     /**
+     * /login
+     */
+    app.post('/login', function(req, res){
+        var email, password;
+        if (req.body.email) {
+            email = req.body.email;
+        } else {
+            email = '';
+        }
+
+        if (req.body.password) {
+            password = md5(req.body.password);
+        } else {
+            email = '';
+        }
+
+
+        models.User.find({ email: email, password: password }).lean().exec(function (err, data) {
+            if (data.length) {
+                return res.end(JSON.stringify({result: 'success'}));
+            } else {
+                return res.end(JSON.stringify({result: 'faliure'}));
+            }
+        });
+    });
+
+    /**
      * dev
      */
     app.get('/dbmigration/e4dc0c36d021c2d98ed390ad76e66967', function(req, res){
         models.User({
             email: "michal@frankiewicz.me",
             password: md5("secret"),
+            type: 1
+        }).save();
+
+        models.User({
+            email: "rogus@agh.edu.pl",
+            password: md5("zpw"),
             type: 1
         }).save();
 
