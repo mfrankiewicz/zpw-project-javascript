@@ -3,11 +3,16 @@
         <div class="form">
             <div class="date form-group">
                 <label>Wybierz datę:</label>
-                <input ng-model="reservation.date" ng-change="setReservationDate()" type="datetime-local" class="form-control">
+                <input ng-model="reservation.datetime" ng-change="setReservationDate()" type="datetime-local" class="form-control">
             </div>
-            <div ng-if="dataStorageService.getData('reservation').date || 1" class="table">
+            <div ng-if="dataStorageService.getData('reservation').date" class="table">
                 <div class="table-map">
-                    <div ng-click="setReservationTable($event, table._id)" ng-repeat="table in tables" class="table" data-toggle="tooltip" data-placement="top" title="Stolik nr {{ table.number }}, ilość miejsc - {{ table.seats }}"></div>
+                    <div ng-click="setReservationTable($event, table._id)" ng-class="{unavailable: !table.available, active: table._id == reservation.tableId}" ng-repeat="table in getAvailableTables()" class="table" data-toggle="tooltip" data-placement="top" title="Stolik nr {{ table.number }}, ilość miejsc - {{ table.seats }}"></div>
+                </div>
+            </div>
+            <div ng-if="dataStorageService.getData('reservation').tableId" class="menu">
+                <div class="col-md-12 text-center mt-50 font-size-2em">
+                    Opcjonalnie <a href="/#!/menu/"><strong>tutaj</strong></a> możesz zarezerwować również potrawy.
                 </div>
             </div>
         </div>

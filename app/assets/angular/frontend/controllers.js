@@ -188,6 +188,7 @@ appControllers.controller('dishCtrl', ['$scope', '$location', 'socket', 'dataSto
 
 appControllers.controller('reservationCtrl', ['$scope', 'dataStorageService', 'dishService', 'reservationService', function($scope, dataStorageService, dishService, reservationService) {
     $scope.dataStorageService = dataStorageService;
+    $scope.reservation = dataStorageService.getData('reservation');
 
     dishService.getDishes().then(function(data) {
         $scope.dishes = data.data;
@@ -205,28 +206,29 @@ appControllers.controller('reservationCtrl', ['$scope', 'dataStorageService', 'd
         $scope.reservations = data.data;
     });
 
-    // $scope.getAvailableTables = function() {
-    //     angular.forEach($scope.tables, function(table) {
-    //         var available = true;
-    //
-    //         angular.forEach($scope.reservations, function(reservation) {
-    //             if (new Date().valueOf() < reservation.date
-    //                 && reservation.tableId == table._id)
-    //         });
-    //     });
-    // }
+    $scope.getAvailableTables = function() {
+        angular.forEach($scope.tables, function(table, key) {
+            table.available = true;
+
+            angular.forEach($scope.reservations, function(reservation) {
+                if (abs(reservation.date - $scope.reservation.date) < 7200) {
+                    table.available = false;
+                }
+            });
+        });
+
+        return $scope.tables;
+    }
 
     $scope.setReservationDate = function() {
-        if ($scope.reservation.date) {
+        if ($scope.reservation.datetime) {
+            $scope.getAvailableTables();
+            $scope.reservation.date = $scope.reservation.datetime.valueOf()/1000;
+            $scope.reservation.tableId = null;
             dataStorageService.setData('reservation', $scope.reservation);
         } else {
             dataStorageService.setData('reservation', null);
         }
-
-        /**
-         * TODO parsowanie daty
-         */
-        console.log(new Date($scope.reservation.date).valueOf());
     }
 
     $scope.setReservationTable = function(event, tableId) {
@@ -234,10 +236,12 @@ appControllers.controller('reservationCtrl', ['$scope', 'dataStorageService', 'd
             $('section#reservation .table-map .table').removeClass('active');
             $(event.target).addClass('active');
 
-            $scope.reservation.table = tableId;
+            $scope.reservation.tableId = tableId;
             dataStorageService.setData('reservation', $scope.reservation);
         }
     }
+
+    $scope.getAvailableTables();
 }]);
 
 appControllers.controller('contactCtrl', ['$scope', function($scope) {
