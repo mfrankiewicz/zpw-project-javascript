@@ -142,3 +142,17 @@ appServices.service('reservationService', ['$http', '$q', function($http, $q){
         }
     }
 }]);
+
+appServices.service('authorizationService', ['$http', '$q', function($http, $q){
+    return {
+        login: function(authorizationData) {
+            var defer = $q.defer();
+
+            $http.post('/login/', authorizationData).then(function(data) {
+                defer.resolve(data);
+            });;
+
+            return defer.promise;
+        }
+    }
+}]);

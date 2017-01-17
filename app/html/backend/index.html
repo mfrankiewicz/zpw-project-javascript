@@ -12,7 +12,7 @@
     </head>
 
     <body ng-cloak class="backend">
-        <header ng-if="dataStorageService.getData('authorized')">
+        <header ng-class="{hidden: !authorized}">
             <nav ng-controller="navigationCtrl">
                 <progress id="browsing-progress" value="0"></progress>
                 <ul class="container">
@@ -26,13 +26,25 @@
             </nav>
         </header>
 
-        <main ng-if="dataStorageService.getData('authorized')" ng-view>
+        <main ng-if="authorized" ng-view>
 
 
         </main>
 
-        <main>
-            #login form
+        <main ng-if="!authorized">
+            <section id="login-form">
+                <div class="container">
+                    <form ng-submit="login()">
+                        <div class="form-group">
+                            <input ng-model="login.email" type="text" class="form-control" placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <input ng-model="login.password" type="password" class="form-control" placeholder="hasło">
+                        </div>
+                        <button type="submit" class="btn btn-success cursor-pointer">zaloguj</button>
+                    </form>
+                </div>
+            </section>
 
         </main>
 

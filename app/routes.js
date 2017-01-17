@@ -1,6 +1,6 @@
 const md5 = require('md5');
 
-module.exports = function(app, express, socket, path, models, md5){
+module.exports = function(app, express, socket, path, models){
     /**
      * static paths
      */
@@ -105,6 +105,33 @@ module.exports = function(app, express, socket, path, models, md5){
             email: req.body.email
         }).save(function(){
             return res.end();
+        });
+    });
+
+    /**
+     * /login
+     */
+    app.post('/login', function(req, res){
+        var email, password;
+        if (req.body.email) {
+            email = req.body.email;
+        } else {
+            email = '';
+        }
+
+        if (req.body.password) {
+            password = md5(req.body.password);
+        } else {
+            email = '';
+        }
+
+
+        models.User.find({ email: email, password: password }).lean().exec(function (err, data) {
+            if (data.length) {
+                return res.end(JSON.stringify({result: 'success'}));
+            } else {
+                return res.end(JSON.stringify({result: 'faliure'}));
+            }
         });
     });
 

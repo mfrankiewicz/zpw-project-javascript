@@ -1,7 +1,17 @@
 var appControllers = angular.module('appControllers',[]);
 
-appControllers.controller('mainCtrl', ['$scope', 'dataStorageService', function($scope, dataStorageService) {
-
+appControllers.controller('mainCtrl', ['$scope', 'dataStorageService', 'authorizationService', function($scope, dataStorageService, authorizationService) {
+    $scope.login = function() {
+        authorizationService.login({
+            email: $scope.login.email,
+            password: $scope.login.password
+        }).then(function(data) {
+            if (data.data.result == "success") {
+                dataStorageService.setData('authorized', true);
+                $scope.authorized = true;
+            }
+        });;
+    }
 }]);
 
 appControllers.controller('navigationCtrl', ['$scope', function($scope) {
