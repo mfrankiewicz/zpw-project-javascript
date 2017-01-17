@@ -117,7 +117,7 @@ module.exports = function(app, express, socket, path, models){
      * /reservations
      */
     app.get('/reservations', function(req, res){
-        models.Reservation.find().lean().exec(function (err, data) {
+        models.Reservation.find().sort([['date', 'descending']]).lean().exec(function (err, data) {
             return res.end(JSON.stringify(data));
         });
     });
