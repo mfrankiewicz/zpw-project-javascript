@@ -23,6 +23,38 @@ module.exports = function(app, express, socket, path, models){
         });
     });
 
+    app.put('/dishes/:dishId', function (req, res) {
+
+        var dishId = req.params.dishId;
+
+        models.Dish.findOneAndUpdate({ _id: dishId }, {
+            dishCategoryId: req.body.dishCategoryId,
+            label: req.body.label,
+            price: req.body.price,
+            description: req.body.description,
+            photos: req.body.photos,
+            available: req.body.available
+        }, {upsert:true}, function(err, doc){
+            socket.sockets.send('DishUpdated');
+            return res.end();
+        });
+
+    });
+
+    app.post('/dishes/', function (req, res) {
+        models.Dish({
+            dishCategoryId: req.body.dishCategoryId,
+            label: req.body.label,
+            price: req.body.price,
+            description: req.body.description,
+            photos: req.body.photos,
+            available: req.body.available
+        }).save(function(){
+            socket.sockets.send('DishAdded');
+            return res.end();
+        });
+    });
+
     /**
      * /dish-categories
      */

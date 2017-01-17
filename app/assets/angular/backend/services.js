@@ -52,6 +52,12 @@ appServices.service('dishService', ['$http', '$q', function($http, $q){
             });
 
             return defer.promise;
+        },
+        updateDish: function(dishId, dish) {
+            return $http.put('/dishes/' + dishId, dish);
+        },
+        addDish: function(dish) {
+            return $http.post('/dishes/', dish);
         }
     }
 }]);

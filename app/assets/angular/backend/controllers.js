@@ -59,26 +59,61 @@ appControllers.controller('menuCtrl', ['$scope', 'dataStorageService', 'dishServ
     $scope.dataStorageService = dataStorageService;
 
     dishService.getDishes().then(function(data) {
-        var dishes = [];
-
-        angular.forEach(data.data, function(dish, key) {
-            if (dish.available) {
-                dishes.push(dish);
-            }
-        });
-        $scope.dishes = dishes;
+        $scope.dishes = data.data;
     });
 }]);
 
-appControllers.controller('dishCtrl', ['$scope', 'dishService', function($scope, dishService) {
+appControllers.controller('dishCtrl', ['$scope', '$routeParams', '$location', 'dishService', function($scope, $routeParams, $location, dishService) {
 
-    dishService.getDish($scope.dishId).then(function(data) {
-        $scope.dish = data.data[0];
-    });
+    $scope.dishId = $routeParams.dishId;
 
     dishService.getDishCategories().then(function(data) {
         $scope.dishCategories = data.data;
+        dishService.getDish($scope.dishId).then(function(data) {
+
+            if (data.data) {
+                data.data[0].price = data.data[0].price.toFixed(2);
+                $scope.dish = data.data[0];
+            } else {
+                $scope.dish = {};
+            }
+
+            $scope.dish.dishCategory = $scope.dishCategories[0];
+            angular.forEach($scope.dishCategories, function(dishCategory) {
+                if (dishCategory._id == $scope.dish.dishCategoryId) {
+                    $scope.dish.dishCategory = dishCategory;
+                }
+            });
+        });
     });
+
+    $scope.addDishPhoto = function() {
+        $scope.dish.photos.push('');
+    }
+
+    $scope.saveDish = function() {
+        if ($scope.dishId) {
+            dishService.updateDish($scope.dishId, {
+                dishCategoryId: $scope.dish.dishCategory._id,
+                label: $scope.dish.label,
+                price: $scope.dish.price,
+                description: $scope.dish.description,
+                photos: $scope.dish.photos,
+                available: $scope.dish.available
+            });
+        } else {
+            dishService.addDish({
+                dishCategoryId: $scope.dish.dishCategory._id,
+                label: $scope.dish.label,
+                price: $scope.dish.price,
+                description: $scope.dish.description,
+                photos: $scope.dish.photos,
+                available: $scope.dish.available
+            });
+        }
+
+        $location.path('/menu');
+    }
 
 
 }]);
