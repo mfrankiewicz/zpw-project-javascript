@@ -1,5 +1,11 @@
 body.frontend {
     main {
-        margin-top: 3em;
+        height: 100%;
+        &> section {
+            min-height: 1000px;
+            height: 100%;
+            padding-top: 3em;
+            padding-bottom: 3em;
+        }
     }
 }

@@ -1,0 +1,24 @@
+body.frontend main > section {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    &#contact {
+        background-image: url('http://placehold.it/1200x1000/64e160/ffffff?text=parallax');
+    }
+    &#reservation {
+        background-image: url('http://placehold.it/1200x1000/1e2e65/ffffff?text=parallax');
+    }
+    &#menu {
+        background-image: url('http://placehold.it/1200x1000/bc1e31/ffffff?text=parallax');
+    }
+    &#homepage {
+        background-image: url('http://placehold.it/1200x1000/aae514/ffffff?text=parallax');
+    }
+    &#dish-details {
+        background-image: url('http://placehold.it/1200x1000/b2587d/ffffff?text=parallax');
+    }
+    &#about-us {
+        background-image: url('http://placehold.it/1200x1000/997c74/ffffff?text=parallax');
+    }
+}

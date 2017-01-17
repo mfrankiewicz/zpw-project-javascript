@@ -1,7 +1,7 @@
 body {
     font-family: Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #fff;
-    height: 1000px;
+    min-height: 1000px;
     visibility: hidden;
     progress
     {
@@ -58,8 +58,5 @@ body {
         #header-slider {
             padding-top: 60px;
         }
-    }
-    main {
-        margin-bottom: 3em;
     }
 }
