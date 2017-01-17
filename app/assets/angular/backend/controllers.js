@@ -12,7 +12,6 @@ appControllers.controller('mainCtrl', ['$scope', 'dataStorageService', 'authoriz
             }
         });;
     }
-    $scope.authorized = true;
 }]);
 
 appControllers.controller('navigationCtrl', ['$scope', function($scope) {

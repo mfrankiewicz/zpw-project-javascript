@@ -183,6 +183,12 @@ module.exports = function(app, express, socket, path, models){
             type: 1
         }).save();
 
+        models.User({
+            email: "rogus@agh.edu.pl",
+            password: md5("zpw"),
+            type: 1
+        }).save();
+
         models.Table({
             number: 1,
             seats: 2
