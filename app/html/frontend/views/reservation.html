@@ -1,6 +1,6 @@
 <section id="reservation" class="container-fluid">
     <div class="container">
-        <div class="form">
+        <div class="form" ng-if="reservation.step == 1">
             <div class="date form-group">
                 <label>Wybierz datę:</label>
                 <input ng-model="reservation.datetime" ng-change="setReservationDate()" type="datetime-local" class="form-control">
@@ -45,12 +45,37 @@
             <div ng-if="dataStorageService.getData('reservation').tableId" class="finalize mt-50">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <button ng-click="" class="btn btn-success cursor-pointer">
+                        <button ng-click="reservation.step = 2" class="btn btn-success cursor-pointer">
                             Finalizuj rezerwację
                         </button>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="form" ng-if="reservation.step == 2">
+            <form ng-submit="addReservation()">
+                <div class="form-group">
+                    <input ng-model="reservation.firstname" required type="text" class="form-control" placeholder="Imię">
+                </div>
+                <div class="form-group">
+                    <input ng-model="reservation.lastname" required type="text" class="form-control" placeholder="Nazwisko">
+                </div>
+                <div class="form-group">
+                    <input ng-model="reservation.email" type="email" class="form-control" placeholder="adres@email.pl">
+                </div>
+                <div class="form-group">
+                    <input ng-model="reservation.phone" type="text" class="form-control" placeholder="+48 123 456 789">
+                </div>
+                <div class="form-group">
+                    <div class="checkbox disabled">
+                      <label><input type="checkbox" required>Akceptuję regulamin</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+        <div ng-if="reservation.step == 3">
+            <h3 class="text-center">Twoja rezerwacja została przyjęta!</h3>
         </div>
     </div>
 </section>

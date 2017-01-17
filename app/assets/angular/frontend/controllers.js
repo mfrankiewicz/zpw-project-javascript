@@ -216,6 +216,11 @@ appControllers.controller('dishCtrl', ['$scope', '$location', 'socket', 'dataSto
 appControllers.controller('reservationCtrl', ['$scope', 'dataStorageService', 'dishService', 'reservationService', function($scope, dataStorageService, dishService, reservationService) {
     $scope.dataStorageService = dataStorageService;
     $scope.reservation = dataStorageService.getData('reservation');
+    if (!$scope.reservation) {
+        $scope.reservation = {};
+    }
+
+    $scope.reservation.step = 1;
 
     dishService.getDishes().then(function(data) {
         $scope.dishes = data.data;
@@ -238,7 +243,7 @@ appControllers.controller('reservationCtrl', ['$scope', 'dataStorageService', 'd
             table.available = true;
 
             angular.forEach($scope.reservations, function(reservation) {
-                if (abs(reservation.date - $scope.reservation.date) < 7200) {
+                if (reservation.tableId == table._id && Math.abs(reservation.date - $scope.reservation.date) < 7200) {
                     table.available = false;
                 }
             });
@@ -298,6 +303,12 @@ appControllers.controller('reservationCtrl', ['$scope', 'dataStorageService', 'd
         });
 
         dataStorageService.setData('reservation', reservation);
+    }
+
+    $scope.addReservation = function() {
+        reservationService.addReservation($scope.reservation);
+        dataStorageService.setData('reservation', {});
+        $scope.reservation.step = 3;
     }
 
     $scope.getAvailableTables();

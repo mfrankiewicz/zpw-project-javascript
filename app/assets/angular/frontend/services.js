@@ -134,6 +134,11 @@ appServices.service('reservationService', ['$http', '$q', function($http, $q){
             });
 
             return defer.promise;
+        },
+        addReservation: function(reservation) {
+            var defer = $q.defer();
+
+            return $http.post('/reservations/', reservation);
         }
     }
 }]);
