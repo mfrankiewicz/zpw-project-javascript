@@ -16,7 +16,8 @@ appFilters.filter('dateFilter', function() {
 
         angular.forEach(input, function(reservation, key) {
             var reservationDate = new Date(reservation.date*1000);
-            reservationDate.setHours(0,0,0,0);
+            reservationDate.setSeconds(0);
+            reservationDate.setMilliseconds(0);
 
             if (date == undefined) {
                 result.push(reservation);
