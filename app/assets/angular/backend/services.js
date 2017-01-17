@@ -24,37 +24,6 @@ appServices.service('dataStorageService', function(){
     }
 });
 
-appServices.factory('socket', ['$rootScope', function ($rootScope) {
-    var socket = io.connect('http://zpw.loc');
-
-    return {
-        on: function (eventName, callback) {
-            function wrapper() {
-            var args = arguments;
-                $rootScope.$apply(function () {
-                    callback.apply(socket, args);
-                });
-            }
-
-            socket.on(eventName, wrapper);
-
-            return function () {
-            socket.removeListener(eventName, wrapper);
-            };
-        },
-        emit: function (eventName, data, callback) {
-            socket.emit(eventName, data, function () {
-                var args = arguments;
-                $rootScope.$apply(function () {
-                    if(callback) {
-                        callback.apply(socket, args);
-                    }
-                });
-            });
-        }
-    };
-}]);
-
 appServices.service('dishService', ['$http', '$q', function($http, $q){
     return {
         getDishes: function() {
@@ -83,35 +52,7 @@ appServices.service('dishService', ['$http', '$q', function($http, $q){
             });
 
             return defer.promise;
-        },
-        addDishRating: function(dishRating) {
-            var defer = $q.defer();
-
-            return $http.post('/dish-ratings/', dishRating);
-        },
-        getDishRatings: function(dishId) {
-            var defer = $q.defer();
-
-            $http.get('/dish-ratings/'+dishId).then(function(data) {
-                defer.resolve(data);
-            });
-
-            return defer.promise;
-        },
-        getDishComments: function(dishId) {
-            var defer = $q.defer();
-
-            $http.get('/dish-comments/'+dishId).then(function(data) {
-                defer.resolve(data);
-            });
-
-            return defer.promise;
-        },
-        addDishComment: function(dishComment) {
-            var defer = $q.defer();
-
-            return $http.post('/dish-comments/', dishComment);
-        },
+        }
     }
 }]);
 

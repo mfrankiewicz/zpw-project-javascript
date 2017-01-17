@@ -12,6 +12,7 @@ appControllers.controller('mainCtrl', ['$scope', 'dataStorageService', 'authoriz
             }
         });;
     }
+    $scope.authorized = true;
 }]);
 
 appControllers.controller('navigationCtrl', ['$scope', function($scope) {
@@ -67,131 +68,19 @@ appControllers.controller('menuCtrl', ['$scope', 'dataStorageService', 'dishServ
         });
         $scope.dishes = dishes;
     });
-
-    dishService.getDishCategories().then(function(data) {
-        $scope.dishCategory = {_id:0, label: 'wybierz kategorię dania'};
-        $scope.dishCategories = [{_id:0, label: 'wybierz kategorię dania'}].concat(data.data);
-    });
-
-    $scope.getDishCountByCategoryId = function(categoryId) {
-        var count = 0;
-        if (!categoryId) {
-            return $scope.dishes.length;
-        }
-
-        angular.forEach($scope.dishes, function(dish, key) {
-            if (dish.dishCategoryId == categoryId) {
-                count++;
-            }
-        });
-
-        return count;
-    };
-
-    $scope.numberOfPages = function(){
-        return Math.ceil($scope.getDishCountByCategoryId($scope.dishCategory._id)/$scope.pageSize);
-    }
-
-    $scope.addDishToReservation = function(dishId) {
-        var newDish = true;
-
-        reservation = dataStorageService.getData('reservation');
-
-        if (reservation.dishes == undefined) {
-            reservation.dishes = [];
-        }
-
-        angular.forEach(reservation.dishes, function(dish, key) {
-            if (dish.dishId == dishId) {
-                dish.quantity++;
-                newDish = false;
-            }
-        });
-
-        if (newDish) {
-            reservation.dishes.push({
-                dishId: dishId,
-                quantity: 1
-            });
-        }
-
-        dataStorageService.setData('reservation', reservation);
-    }
-
 }]);
 
-appControllers.controller('dishCtrl', ['$scope', '$location', 'socket', 'dataStorageService', 'dishService', function($scope, $location, socket, dataStorageService, dishService) {
-    var dishId = dataStorageService.getData('detailsDishId');//'587b9b7fbc202f0740e4cea1';
+appControllers.controller('dishCtrl', ['$scope', 'dishService', function($scope, dishService) {
 
-    if (!dishId) {
-        $location.path('/menu');
-    }
-
-    dishService.getDish(dishId).then(function(data) {
+    dishService.getDish($scope.dishId).then(function(data) {
         $scope.dish = data.data[0];
     });
 
     dishService.getDishCategories().then(function(data) {
-        angular.forEach(data.data, function(dishCategory) {
-            if ($scope.dish.dishCategoryId == dishCategory._id) {
-                $scope.dishCategory = dishCategory;
-            }
-        });
+        $scope.dishCategories = data.data;
     });
 
-    $scope.getDishComments = function() {
-        dishService.getDishComments(dishId).then(function(data) {
-            $scope.dishComments = data.data;
-        });
-    }
 
-    $scope.getDishRating = function() {
-        dishService.getDishRatings(dishId).then(function(data) {
-            var count = 0;
-            var sum = 0;
-            angular.forEach(data.data, function(dishRating) {
-                count++;
-                sum += dishRating.rating;
-            });
-
-            if (!count && !sum) {
-                $scope.rating = 'brak ocen';
-            } else {
-                $scope.rating = (sum/count).toFixed(2);
-            }
-        });
-    }
-
-    $scope.rateDish = function(dishId, rating) {
-        dishService.addDishRating({
-            dishId: dishId,
-            rating: rating
-        });
-        $scope.rated = true;
-    }
-
-    $scope.addDishComment = function(dishId) {
-        dishService.addDishComment({
-            dishId: dishId,
-            author: $scope.dishComment.author,
-            comment: $scope.dishComment.comment,
-            dateAdded: new Date().valueOf()
-        })
-    }
-
-    socket.on('message', function (message) {
-        switch (message) {
-            case "DishCommentAdded":
-                $scope.getDishComments();
-                break;
-            case "DishRatingAdded":
-                $scope.getDishRating();
-                break;
-        }
-    });
-
-    $scope.getDishRating();
-    $scope.getDishComments();
 }]);
 
 appControllers.controller('reservationCtrl', ['$scope', 'dataStorageService', 'dishService', 'reservationService', function($scope, dataStorageService, dishService, reservationService) {
