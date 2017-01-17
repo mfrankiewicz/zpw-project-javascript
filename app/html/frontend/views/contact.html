@@ -8,7 +8,16 @@
             <p>Mauris ipsum. <b>Curabitur sodales ligula in libero</b>. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. <b>Maecenas mattis</b>. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. <b>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh</b>. Nunc feugiat mi a tellus consequat imperdiet. <b>Fusce ac turpis quis ligula lacinia aliquet</b>. Vestibulum sapien. <i>In scelerisque sem at dolor</i>. Proin quam. </p>
         </div>
         <div class="map mt-50">
-            <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+            <ui-gmap-google-map center="map.center" zoom="map.zoom">
+                <ui-gmap-window coords="marker.coords" show="window.show">
+                    <div>
+                        <p>AGH Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej</p>
+                        <p>al. A. Mickiewicza 30, 30-059 Kraków</p>
+                    </div>
+                </ui-gmap-window>
+                <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
         </div>
     </div>
 </section>
