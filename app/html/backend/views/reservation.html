@@ -13,7 +13,7 @@
                 <strong>Numer stolika</strong>
             </div>
             <div class="col-md-6">
-                {{ reservation.tableId }}
+                {{ getTableByTableId(reservation.tableId).number }}
             </div>
         </div>
         <div class="row">

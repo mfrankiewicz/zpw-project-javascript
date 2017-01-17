@@ -155,4 +155,16 @@ appControllers.controller('reservationCtrl', ['$scope', '$routeParams', 'dishSer
         return label;
     }
 
+    $scope.getTableByTableId = function(tableId) {
+        var result = null;
+
+        angular.forEach($scope.tables, function(table) {
+            if (table._id == tableId) {
+                result = table;
+            }
+        });
+
+        return result;
+    }
+
 }]);
