@@ -87,6 +87,9 @@ appControllers.controller('dishCtrl', ['$scope', '$routeParams', '$location', 'd
     });
 
     $scope.addDishPhoto = function() {
+        if ($scope.dish.photos == undefined) {
+            $scope.dish.photos = [];
+        }
         $scope.dish.photos.push('');
     }
 
