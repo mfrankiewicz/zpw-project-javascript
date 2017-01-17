@@ -14,6 +14,42 @@
                 <div class="col-md-12 text-center mt-50 font-size-2em">
                     Opcjonalnie <a href="/#!/menu/"><strong>tutaj</strong></a> możesz zarezerwować również potrawy.
                 </div>
+                <div ng-if="dataStorageService.getData('reservation').dishes && dataStorageService.getData('reservation').dishes.length" class="list mt-50">
+                    <h3 class="text-center">Zarezerwowane potrawy</h3>
+                    <div class="row text-bold text-center mt-30">
+                        <div class="col-md-6">
+                            Potrawa
+                        </div>
+                        <div class="col-md-2">
+                            Ilość
+                        </div>
+                        <div class="col-md-4">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div ng-repeat="dish in dataStorageService.getData('reservation').dishes" class="row text-center mt-10">
+                        <div class="col-md-6">
+                            {{ getDishLabelByDishId(dish.dishId) }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ dish.quantity }}
+                        </div>
+                        <div class="col-md-4">
+                            <button ng-click="removeDishFromReservation(dish.dishId)" class="btn btn-danger cursor-pointer">
+                                Usuń z rezerwacji
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="dataStorageService.getData('reservation').tableId" class="finalize mt-50">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button ng-click="" class="btn btn-success cursor-pointer">
+                            Finalizuj rezerwację
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -110,6 +110,33 @@ appControllers.controller('menuCtrl', ['$scope', 'dataStorageService', 'dishServ
     $scope.numberOfPages = function(){
         return Math.ceil($scope.getDishCountByCategoryId($scope.dishCategory._id)/$scope.pageSize);
     }
+
+    $scope.addDishToReservation = function(dishId) {
+        var newDish = true;
+
+        reservation = dataStorageService.getData('reservation');
+
+        if (reservation.dishes == undefined) {
+            reservation.dishes = [];
+        }
+
+        angular.forEach(reservation.dishes, function(dish, key) {
+            if (dish.dishId == dishId) {
+                dish.quantity++;
+                newDish = false;
+            }
+        });
+
+        if (newDish) {
+            reservation.dishes.push({
+                dishId: dishId,
+                quantity: 1
+            });
+        }
+
+        dataStorageService.setData('reservation', reservation);
+    }
+
 }]);
 
 appControllers.controller('dishCtrl', ['$scope', '$location', 'socket', 'dataStorageService', 'dishService', function($scope, $location, socket, dataStorageService, dishService) {
@@ -239,6 +266,38 @@ appControllers.controller('reservationCtrl', ['$scope', 'dataStorageService', 'd
             $scope.reservation.tableId = tableId;
             dataStorageService.setData('reservation', $scope.reservation);
         }
+    }
+
+    $scope.getDishLabelByDishId = function(dishId) {
+        var label = '';
+
+        angular.forEach($scope.dishes, function(dish) {
+            if (dish._id == dishId) {
+                label = dish.label;
+            }
+        });
+
+        return label;
+    }
+
+    $scope.removeDishFromReservation = function(dishId) {
+        reservation = dataStorageService.getData('reservation');
+
+        if (reservation.dishes == undefined) {
+            reservation.dishes = [];
+        }
+
+        angular.forEach(reservation.dishes, function(dish, key) {
+            if (dish.dishId == dishId) {
+                dish.quantity--;
+
+                if (dish.quantity == 0) {
+                    reservation.dishes.splice(key, 1);
+                }
+            }
+        });
+
+        dataStorageService.setData('reservation', reservation);
     }
 
     $scope.getAvailableTables();
