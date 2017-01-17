@@ -1,0 +1,73 @@
+section#reservation {
+    .form {
+        .date {
+            width: 50%;
+            margin: 0 auto;
+        }
+        &>.table {
+            margin-top: 4em;
+            .table-map {
+                position: relative;
+                border: 1px solid #000;
+                height: 0;
+                width: 100%;
+                padding-bottom: 50%;
+                background: #f5f4d3;
+                .table {
+                    position: absolute;
+                    background-color: #44a03a;
+                    height: 0;
+                    padding-bottom: 10%;
+                    width: 10%;
+                    border-radius: 50%;
+                    margin: 0;
+                    cursor: pointer;
+                    &.unavailable {
+                        cursor: not-allowed;
+                        background-color: #c50b0b;
+                    }
+                    &.active {
+                        &:before {
+                            position: absolute;
+                            left: -10%;
+                            top: calc(-10% - 2px);
+                            content: '';
+                            display: block;
+                            background-color: transparent;
+                            height: 0;
+                            padding-bottom: 120%;
+                            width: 120%;
+                            border-radius: 50%;
+                            margin: 0;
+                            border: 2px solid #ff0000;
+                        }
+                    }
+                    &:nth-of-type(1) {
+                        top: 9%;
+                        left: 11%;
+                    }
+                    &:nth-of-type(2) {
+                        top: 46%;
+                        left: 27%;
+                    }
+                    &:nth-of-type(3) {
+                        top: 72%;
+                        left: 5%;
+                    }
+                    &:nth-of-type(4) {
+                        top: 17%;
+                        left: 44%;
+                    }
+                    &:nth-of-type(5) {
+                        top: 21%;
+                        left: 78%;
+                    }
+                    &:nth-of-type(6) {
+                        top: 65%;
+                        left: 60%;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -90,6 +90,24 @@ module.exports = function(app, express, socket, path, models, md5){
         });
     });
 
+    app.post('/reservations', function(req, res){
+
+        if (!req.body.dishes) {
+            req.body.dishes = [];
+        }
+        models.Reservation({
+            tableId: req.body.tableId,
+            date: req.body.date,
+            dishes: req.body.dishes,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            phone: req.body.phone,
+            email: req.body.email
+        }).save(function(){
+            return res.end();
+        });
+    });
+
     /**
      * dev
      */

@@ -3,9 +3,10 @@ const sass = require('gulp-sass');
 const rename = require('gulp-rename');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
-const gulpUtil = require('gulp-util');
 const bower = require('gulp-bower');
 const nodemon = require('nodemon');
+
+function swallowError (error) { this.emit('end') }
 
 gulp.task('sass', function () {
     return gulp.src('./assets/sass/styles.scss')
@@ -20,7 +21,7 @@ gulp.task('js', function() {
         './assets/js/scripts.js'
     ])
     .pipe(concat('scripts.min.js'))
-    .pipe(uglify())
+    .pipe(uglify().on('error', swallowError))
     .pipe(gulp.dest('./html/assets/js/'));
 });
 
@@ -29,7 +30,7 @@ gulp.task('angular-backend', function() {
         './assets/angular/backend/app.js'
     ])
     .pipe(concat('app-backend.min.js'))
-    .pipe(uglify())
+    .pipe(uglify().on('error', swallowError))
     .pipe(gulp.dest('./html/assets/js/'));
 });
 
@@ -41,7 +42,7 @@ gulp.task('angular-frontend', function() {
         './assets/angular/frontend/app.js'
     ])
     .pipe(concat('app-frontend.min.js'))
-    .pipe(uglify().on('error', gulpUtil.log))
+    .pipe(uglify().on('error', swallowError))
     .pipe(gulp.dest('./html/assets/js/'));
 });
 

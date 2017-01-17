@@ -34,7 +34,10 @@ module.exports = function(mongoose){
     mongoose.model('reservations', new Schema({
         tableId: String,
         date: Number,
-        dishes: [String],
+        dishes: [new Schema({
+            dishId : String,
+            quantity : Number
+        })],
         firstname: String,
         lastname: String,
         phone: String,
