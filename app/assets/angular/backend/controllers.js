@@ -119,6 +119,7 @@ appControllers.controller('dishCtrl', ['$scope', '$routeParams', '$location', 'd
 }]);
 
 appControllers.controller('reservationCtrl', ['$scope', '$routeParams', 'dishService', 'reservationService', function($scope, $routeParams, dishService, reservationService) {
+
     $scope.reservationId = $routeParams.reservationId;
 
     dishService.getDishes().then(function(data) {
@@ -135,6 +136,10 @@ appControllers.controller('reservationCtrl', ['$scope', '$routeParams', 'dishSer
 
     reservationService.getReservations().then(function(data) {
         $scope.reservations = data.data;
+    });
+
+    reservationService.getReservation($scope.reservationId).then(function(data) {
+        $scope.reservation = data.data[0];
     });
 
 

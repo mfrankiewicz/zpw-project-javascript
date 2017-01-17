@@ -86,7 +86,16 @@ appServices.service('reservationService', ['$http', '$q', function($http, $q){
             var defer = $q.defer();
 
             return $http.post('/reservations/', reservation);
-        }
+        },
+        getReservation: function(reservationId) {
+            var defer = $q.defer();
+
+            $http.get('/reservations/'+reservationId).then(function(data) {
+                defer.resolve(data);
+            });
+
+            return defer.promise;
+        },
     }
 }]);
 

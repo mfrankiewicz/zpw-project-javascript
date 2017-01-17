@@ -122,6 +122,12 @@ module.exports = function(app, express, socket, path, models){
         });
     });
 
+    app.get('/reservations/:reservationId', function(req, res){
+        models.Reservation.find({ _id:req.params.reservationId }).lean().exec(function (err, data) {
+            return res.end(JSON.stringify(data));
+        });
+    });
+
     app.post('/reservations', function(req, res){
 
         if (!req.body.dishes) {
