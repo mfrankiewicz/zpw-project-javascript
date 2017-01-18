@@ -16,7 +16,7 @@
             <nav ng-controller="navigationCtrl">
                 <progress id="browsing-progress" value="0"></progress>
                 <ul class="container">
-                    <li ng-repeat="page in pages" ng-class="{active: page.active}">
+                    <li ng-repeat="page in pages" ng-class="{active: page.active}" data-color="{{ page.color }}">
                         <a href="{{ page.url }}">
                             {{ page.label }}
                         </a>
@@ -44,7 +44,7 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div ng-repeat="slide in slides track by $index" class="carousel-item" ng-class="{active: $index==0}">
-                        <img class="pull-auto d-block img-fluid" ng-src="{{ slide }}">
+                        <img class="pull-auto d-block img-fluid full-width" ng-src="{{ slide }}">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#header-slider" role="button" data-slide="prev">

@@ -21,23 +21,28 @@ appControllers.controller('navigationCtrl', ['$scope', function($scope) {
         {
             url: "#!/",
             label: "Strona główna",
+            color: "#aae514",
             active: true
         },
         {
             url: "#!/about-us",
-            label: "O właścicielach"
+            label: "O właścicielach",
+            color: "#2bcbd4"
         },
         {
             url: "#!/menu",
-            label: "Menu"
+            label: "Menu",
+            color: "#ffd700"
         },
         {
             url: "#!/reservation",
-            label: "Rezerwacja"
+            label: "Rezerwacja",
+            color: "#ff4b13"
         },
         {
             url: "#!/contact",
-            label: "Kontakt"
+            label: "Kontakt",
+            color: "#64e160"
         }
     ];
 

@@ -4,13 +4,18 @@ $.fn.navigation = function(){
 
     this.moveActiveMark = function(liElement){
         if (liElement == undefined || !liElement.length) {
-            liElement = $('li.active', this.navigationElement);
+            liElement = $('ul.container li.active', this.navigationElement);
+        }
+
+        if ($(liElement).data('color')) {
+            $('.active-mark', this.navigationElement).css('background-color', $(liElement).data('color'));
         }
         $('.active-mark', this.navigationElement).width($(liElement).width());
         $('.active-mark', this.navigationElement).css('left', $('a', liElement).position().left + 'px');
     }
 
     this.navigationClickCallback = function(event){
+        $('html,body').animate({ scrollTop: 0 }, 'slow');
         $('ul.container li', _this.navigationElement).removeClass('active');
         $(this).parent().addClass('active');
         _this.moveActiveMark();
