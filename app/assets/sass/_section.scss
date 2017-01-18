@@ -1,8 +1,12 @@
 body.frontend main > section {
+    position: relative;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
+    &>div {
+        z-index: 1;
+    }
     &#contact {
         background-image: url('http://placehold.it/1200x1000/64e160/ffffff?text=parallax');
     }
@@ -10,15 +14,25 @@ body.frontend main > section {
         background-image: url('http://placehold.it/1200x1000/1e2e65/ffffff?text=parallax');
     }
     &#menu {
-        background-image: url('http://placehold.it/1200x1000/bc1e31/ffffff?text=parallax');
+        background-image: url('http://placehold.it/1200x1000/ffd700/ffffff?text=parallax');
     }
     &#homepage {
         background-image: url('http://placehold.it/1200x1000/aae514/ffffff?text=parallax');
     }
     &#dish-details {
-        background-image: url('http://placehold.it/1200x1000/b2587d/ffffff?text=parallax');
+        background-image: url('http://placehold.it/1200x1000/36648b/ffffff?text=parallax');
     }
     &#about-us {
         background-image: url('http://placehold.it/1200x1000/997c74/ffffff?text=parallax');
+    }
+    &:after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.6);
     }
 }
