@@ -1,7 +1,9 @@
 var appControllers = angular.module('appControllers',[]);
 
-appControllers.controller('mainCtrl', ['$scope', function($scope) {
-
+appControllers.controller('mainCtrl', ['$scope', '$route', function($scope, $route) {
+    $scope.$on('$routeChangeSuccess', function() {
+        $('html,body').animate({ scrollTop: 0 }, 'slow');
+    });
 }]);
 
 appControllers.controller('sliderCtrl', ['$scope', function($scope) {
@@ -170,7 +172,7 @@ appControllers.controller('dishCtrl', ['$scope', '$location', 'socket', 'dataSto
 
     dishService.getDishCategories().then(function(data) {
         angular.forEach(data.data, function(dishCategory) {
-            if ($scope.dish.dishCategoryId == dishCategory._id) {
+            if ($scope.dish != undefined && $scope.dish.dishCategoryId == dishCategory._id) {
                 $scope.dishCategory = dishCategory;
             }
         });

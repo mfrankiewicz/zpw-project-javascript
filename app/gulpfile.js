@@ -42,6 +42,7 @@ gulp.task('angular-frontend', function() {
         './assets/angular/frontend/controllers.js',
         './assets/angular/frontend/filters.js',
         './assets/angular/frontend/services.js',
+        './assets/angular/frontend/directives.js',
         './assets/angular/frontend/app.js'
     ])
     .pipe(concat('app-frontend.min.js'))
