@@ -1,12 +1,7 @@
 var appControllers = angular.module('appControllers',[]);
 
 appControllers.controller('mainCtrl', ['$scope', function($scope) {
-    /**
-     * fix bootstrap carousel indicators (angular routing conflict)
-     */
-    $('a[data-slide]').on('click', function(event) {
-        event.preventDefault();
-    });
+
 }]);
 
 appControllers.controller('sliderCtrl', ['$scope', function($scope) {

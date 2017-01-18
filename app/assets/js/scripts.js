@@ -11,6 +11,13 @@ $(document).ready(function() {
      * @fixme fix event binding to dynamic content
      */
     $(document).hover(function(){
+        /**
+         * fix bootstrap carousel indicators (angular routing conflict)
+         */
+        $('a[data-slide]').on('click', function(event) {
+            event.preventDefault();
+        });
+        
         $('i[data-rating-star]').hover(function() {
             $(this).prevAll().css("opacity", "1");
             $(this).css("opacity", "1");
