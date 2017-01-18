@@ -1,7 +1,7 @@
 body {
     font-family: Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #fff;
-    height: 1000px;
+    min-height: 1000px;
     visibility: hidden;
     progress
     {
@@ -18,12 +18,22 @@ body {
             background-color: #484848;
             height: 60px;
             progress {
+                z-index: 2;
                 top: -12px;
                 position: relative;
                 width: 100%;
                 height: 5px;
                 @include progress-bar-value-color(#e80000);
                 @include progress-bar-color(#fff);
+            }
+            .open {
+                display: none;
+                text-align: right;
+                margin-top: -7px;
+                font-size: 1.5em;
+                margin-right: .7em;
+                color: #fff;
+                cursor: pointer;
             }
             ul {
                 padding-left: 0;
@@ -53,13 +63,62 @@ body {
                     left: 190px;
                     transition: .7s;
                 }
+                &.mobile {
+                    position: absolute;
+                    top: -350%;
+                    background-color: #484848;
+                    width: 100%;
+                    z-index: 1;
+                    transition: .7s;
+                    li {
+                        display: block;
+                        margin-left: 0 !important;
+                        margin-bottom: 15px !important;
+                        &:not(:last-of-type) {
+                            margin-bottom: 1em;
+                        }
+                        &:hover {
+                            a {
+                                color: red !important;
+                            }
+                        }
+                    }
+                    .close-bar {
+                        width: 100%;
+                        background-color: #3c3737;
+                        color: #00efff;
+                        font-weight: bold;
+                        font-size: 13px;
+                        cursor: pointer;
+                    }
+                }
             }
         }
         #header-slider {
             padding-top: 60px;
         }
     }
-    main {
-        margin-bottom: 3em;
+    footer {
+        padding: 3em 0;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        background-color: #461a1a;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    header nav {
+        .open {
+            display: block !important;
+        }
+        ul {
+            &:not(.mobile) {
+                display: none;
+            }
+            &.mobile {
+                display: block;
+            }
+        }
     }
 }

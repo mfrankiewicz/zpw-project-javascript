@@ -333,5 +333,20 @@ appControllers.controller('reservationCtrl', ['$scope', 'dataStorageService', 'd
 }]);
 
 appControllers.controller('contactCtrl', ['$scope', function($scope) {
-
+    $scope.map = { center: { latitude: 50.067148, longitude: 19.919151 }, zoom: 15 };
+    $scope.window = {
+        show: false,
+    };
+    $scope.marker = {
+        id: 0,
+        coords: {
+            latitude: 50.067148,
+            longitude: 19.919151
+        },
+        events: {
+            click: function (marker, eventName, args) {
+                $scope.window.show = !$scope.window.show;
+            }
+        }
+    };
 }]);

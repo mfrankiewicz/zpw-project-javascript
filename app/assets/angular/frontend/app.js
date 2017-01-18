@@ -2,7 +2,8 @@ var app = angular.module('frontendApp', [
     'ngRoute',
     'appControllers',
     'appServices',
-    'appFilters'
+    'appFilters',
+    'uiGmapgoogle-maps'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {
