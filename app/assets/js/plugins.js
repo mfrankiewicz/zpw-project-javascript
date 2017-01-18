@@ -11,7 +11,7 @@ $.fn.navigation = function(){
     }
 
     this.navigationClickCallback = function(event){
-        $('ul li', _this.navigationElement).removeClass('active');
+        $('ul.container li', _this.navigationElement).removeClass('active');
         $(this).parent().addClass('active');
         _this.moveActiveMark();
     }
@@ -32,8 +32,8 @@ $.fn.navigation = function(){
         if ($(this.get(0)).length) {
             this.navigationElement = $(this.get(0));
             this.moveActiveMark();
-            $('ul li a', this.navigationElement).on('click', this.navigationClickCallback);
-            $('li', this.navigationElement).hover(this.navigationHoverInCallback, this.navigationHoverOutCallback);
+            $('ul.container li a', this.navigationElement).on('click', this.navigationClickCallback);
+            $('ul.container li', this.navigationElement).hover(this.navigationHoverInCallback, this.navigationHoverOutCallback);
             $(window).resize(this.windowResizeCallback);
         }
     }

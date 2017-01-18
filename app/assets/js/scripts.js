@@ -21,4 +21,12 @@ $(document).ready(function() {
     });
 
     $('body').css("visibility", "visible");
+
+    $('nav .open').on('click', function(){
+        $('nav ul.mobile').css("top", "30%");
+    });
+
+    $('nav ul.mobile .close-bar, nav ul.mobile li a').on('click', function(){
+        $('nav ul.mobile').css("top", "-350%");
+    });
 });

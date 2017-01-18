@@ -23,6 +23,17 @@
                     </li>
                     <div class="active-mark"></div>
                 </ul>
+                <ul class="mobile">
+                    <li ng-repeat="page in pages" ng-class="{active: page.active}">
+                        <a href="{{ page.url }}">
+                            {{ page.label }}
+                        </a>
+                    </li>
+                    <div class="close-bar">zwiń</div>
+                </ul>
+                <div class="open">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </div>
             </nav>
             <div ng-controller="sliderCtrl" id="header-slider" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
