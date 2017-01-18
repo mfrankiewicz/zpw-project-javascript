@@ -15,7 +15,6 @@ $.fn.navigation = function(){
     }
 
     this.navigationClickCallback = function(event){
-        $('html,body').animate({ scrollTop: 0 }, 'slow');
         $('ul.container li', _this.navigationElement).removeClass('active');
         $(this).parent().addClass('active');
         _this.moveActiveMark();
