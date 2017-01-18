@@ -25,7 +25,7 @@ appServices.service('dataStorageService', function(){
 });
 
 appServices.factory('socket', ['$rootScope', function ($rootScope) {
-    var socket = io.connect('http://zpw.loc');
+    var socket = io.connect('http://zpw.frankiewicz.me');
 
     return {
         on: function (eventName, callback) {

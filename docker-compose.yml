@@ -17,7 +17,7 @@ services:
         volumes:
             - ./app:/usr/src/app
         environment:
-            - "VIRTUAL_HOST=zpw.loc,www.zpw.loc"
+            - "VIRTUAL_HOST=zpw.frankiewicz.me,www.zpw.frankiewicz.me"
     mongodb:
         container_name: mongodb
         image: library/mongo
