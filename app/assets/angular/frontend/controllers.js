@@ -4,15 +4,6 @@ appControllers.controller('mainCtrl', ['$scope', '$route', function($scope, $rou
     $scope.$on('$routeChangeSuccess', function() {
         $('html,body').animate({ scrollTop: 0 }, 'slow');
     });
-
-    $scope.$on('$viewContentLoaded', function(){
-        /**
-         * fix bootstrap carousel indicators (angular routing conflict)
-         */
-        $('a[data-slide]').on('click', function(event) {
-            event.preventDefault();
-        });
-     });
 }]);
 
 appControllers.controller('sliderCtrl', ['$scope', function($scope) {
@@ -168,17 +159,7 @@ appControllers.controller('menuCtrl', ['$scope', 'socket', 'dataStorageService',
 
 }]);
 
-appControllers.controller('dishCtrl', ['$scope', '$location', '$timeout', 'socket', 'dataStorageService', 'dishService', function($scope, $location, $timeout, socket, dataStorageService, dishService) {
-    $timeout(function(){
-        $('i[data-rating-star]').hover(function() {
-            $(this).prevAll().css("opacity", "1");
-            $(this).css("opacity", "1");
-        }, function() {
-            $(this).siblings().css("opacity", ".5");
-            $(this).css("opacity", ".5");
-        });
-    }, 0);
-
+appControllers.controller('dishCtrl', ['$scope', '$location', 'socket', 'dataStorageService', 'dishService', function($scope, $location, socket, dataStorageService, dishService) {
     var dishId = dataStorageService.getData('detailsDishId');//'587b9b7fbc202f0740e4cea1';
 
     if (!dishId) {

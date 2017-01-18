@@ -11,7 +11,7 @@
                         Ocena: {{ rating }}
                     </div>
                     <div class="rating-stars">
-                        <i ng-if="!rated" ng-repeat="rating in [1, 2, 3, 4, 5]" ng-click="rateDish(dish._id, rating)" class="fa fa-star" aria-hidden="true" data-rating-star></i>
+                        <i ng-if="!rated" ng-repeat="rating in [1, 2, 3, 4, 5]" ng-click="rateDish(dish._id, rating)" class="fa fa-star" aria-hidden="true" data-rating-star rating-star></i>
                     </div>
                 </div>
             </div>
@@ -27,11 +27,11 @@
                         <img class="d-block img-fluid" ng-src="{{ photo }}">
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#dish-photos" role="button" data-slide="prev">
+                <a class="carousel-control-prev" data-target="#dish-photos" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
-                <a class="carousel-control-next" href="#dish-photos" role="button" data-slide="next">
+                <a class="carousel-control-next" data-target="#dish-photos" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>

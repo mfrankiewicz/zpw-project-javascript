@@ -3,6 +3,7 @@ var app = angular.module('frontendApp', [
     'appControllers',
     'appServices',
     'appFilters',
+    'appDirectives',
     'uiGmapgoogle-maps'
 ]);
 
